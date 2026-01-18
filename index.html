@@ -155,9 +155,12 @@
  }
  
  .marquee-wrapper{
-   display: inline-block;
+   display: inline-flex;
    white-space: nowrap;
    animation: marquee var(--marquee-speed) linear infinite;
+   will-change: transform;
+   transform: translateZ(0);
+   -webkit-transform: translateZ(0);
  }
  
  header h1{
@@ -174,6 +177,7 @@
    background-size: 200% 100%;
    animation: colorShift var(--marquee-color-duration) ease-in-out infinite;
    -webkit-background-clip: text;
+   -moz-background-clip: text;
    background-clip: text;
    -webkit-text-fill-color: transparent;
    padding: 0;
@@ -212,7 +216,7 @@
 <header>
   <div class="marquee-container">
     <div class="marquee-wrapper">
-      <h1>Anh yêu em   Anh yêu em   Anh yêu em   </h1>
+      <h1>Anh yêu em❤️   Anh yêu em❤️   Anh yêu em   ❤️</h1>
     </div>
   </div>
 </header>

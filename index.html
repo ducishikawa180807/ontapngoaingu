@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 <meta name="theme-color" content="#0f172a" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
-<title>Ôn tập tiếng Hàn — Miêu tả món ăn (v5)</title>
+<title> Chúc bé học giỏi !!! </title>
 <style>
  :root{
    --bg:#0f172a;--card:#111827;--pri:#22d3ee;--ok:#22c55e;--bad:#ef4444;--text:#e5e7eb;--muted:#9ca3af;
@@ -356,11 +356,11 @@ const GROUPS = {
     {"kr":"데치다","vi":"Trụng, trần"},
     {"kr":"졸이다","vi":"Ninh, hầm"},
     {"kr":"자르다","vi":"Cắt"},
-    {"kr":"썰다","vi":"Thái sợi, cắt lát"},
-    {"kr":"다지다","vi":"Giã bằm, băm nhỏ"},
-    {"kr":"싸다","vi":"Gói, cuốn"},
-    {"kr":"넣다","vi":"Bỏ vào"},
-    {"kr":"비비다","vi":"Trộn, quấy"},
+    {"kr":"썰다","vi":"Thái"},
+    {"kr":"다지다","vi":"Băm nhỏ"},
+    {"kr":"싸다","vi":"Gói"},
+    {"kr":"넣다","vi":"Thêm"},
+    {"kr":"비비다","vi":"Trộn"},
     {"kr":"맛을 보다","vi":"Nêm nếm"}
   ],
 
@@ -486,8 +486,43 @@ const GROUPS = {
 let currentGroup="Nhóm Từ";
 let DATA = GROUPS[currentGroup];
 
-// ====== IMG ======
-const IMG={"ngon":"🤤","không ngon":"😖","ngọt":"🍬","mặn":"🧂","hơi mặn":"🧂","chua":"🍋","cay":"🌶️","đắng":"☕","nhạt":"💧","tươi":"🥗","mềm":"🧈","béo ngậy":"🧀","thanh đạm":"🫖"};
+// ====== EMOJI MAPPING for Vietnamese terms ======
+const EMOJI_MAP = {
+  /* tastes / feelings */
+  "ngon":"🤤","không ngon":"😖","ngọt":"🍬","mặn":"🧂","hơi mặn":"🧂","chua":"🍋","cay":"🌶️","đắng":"☕","nhạt":"💧","tươi":"🥗","mềm":"🧈","béo ngậy":"🧀","thanh đạm":"🫖",
+
+  /* actions / kitchen verbs */
+  "rửa":"🧼","rã đông":"❄️","cắt":"🔪","cắt hành":"🔪🧅","bóc tỏi":"🧄","thái":"🔪","rửa rau":"🥬","chuẩn bị gia vị":"🧂","cân":"⚖️","gọt":"🔪","xếp":"📥",
+  "chiên":"🍳","xào":"🍳","luộc":"🍲","hầm":"🍖","nêm":"🧂","dầu":"🛢️","nướng":"🔥","hấp":"🥟","lấy bát":"🍽️","lấy thìa":"🥄","lấy đũa":"🥢","sắp xếp":"🍽️",
+  "trang trí":"🌿","gọi phục vụ":"📣","thử vị":"👅","rửa bát":"🧽","lau":"🧹","đổ rác":"🗑️","khăn":"🧻","khử mùi":"🧴","cất":"📦","lau bếp":"🧽",
+  "dọn tủ lạnh":"🧊","bị đổ dầu":"🫗","bị cháy":"🔥","cắt vào tay":"🤕","nước sôi trào":"💦","đổ canh":"🍵","làm vỡ bát":"💥","bị bỏng":"🤕","thiếu nhân viên":"👥",
+  "máy hút mùi hỏng":"🔧","khách gọi món gấp":"⏰",
+
+  /* condiments / seasoning */
+  "đường":"🍬","muối":"🧂","bột ngọt":"🧂","ớt bột":"🌶️","tiêu":"🧂","giấm":"🫙","nước mắm":"🥫","nước tương":"🥫","dầu ăn":"🛢️","dầu mè":"🌰","tương ớt":"🌶️","tương đậu":"🥣",
+
+  /* proteins & seafood */
+  "thịt":"🥩","thịt bò":"🥩","thịt lợn":"🥓","thịt vịt":"🦆","thịt gà":"🍗","cá":"🐟","tôm":"🍤","cua":"🦀","mực":"🦑","lươn":"🐍","hến":"🐚","sò":"🐚","bào ngư":"🐚","trứng":"🥚","đậu phụ":"🧈",
+
+  /* vegetables & fruits */
+  "rau":"🥬","rau muống":"🥬","cải thảo":"🥬","nấm":"🍄","khoai tây":"🥔","khoai lang":"🍠","cà rốt":"🥕","dưa leo":"🥒","cà chua":"🍅","chanh":"🍋","hành":"🧅","tỏi":"🧄","kim chi":"🥬",
+
+  /* staples & carbs */
+  "mì":"🍜","mì ăn liền":"🍜","cơm":"🍚","bánh":"🥟","bánh bao":"🥟","vo gạo":"🍚","gạo":"🍚",
+
+  /* utensils & appliances */
+  "dao":"🔪","chảo":"🍳","nồi":"🥘","lò nướng":"🔥","lò vi sóng":"📻","tủ lạnh":"🧊","thớt":"🔪","muỗng":"🥄","thìa":"🥄","đũa":"🥢","dĩa":"🍴","bát":"🍽️","đĩa":"🍽️","khay":"🧺","tạp dề":"🧑‍🍳","máy xay":"🔌","máy rửa chén":"🧼",
+
+  /* misc */
+  "nước":"💧","trà":"🍵","rượu":"🍶","đồ ngọt":"🍰"
+};
+
+// heuristic fallback keywords (single words)
+const FALLBACK_KEYWORDS = [
+  ["thịt","🥩"],["rau","🥬"],["cá","🐟"],["tôm","🍤"],["bánh","🥟"],["cơm","🍚"],["mì","🍜"],
+  ["dao","🔪"],["chảo","🍳"],["nồi","🥘"],["tủ lạnh","🧊"],["muối","🧂"],["đường","🍬"],["ớt","🌶️"],
+  ["trứng","🥚"],["nấm","🍄"],["khoai","🥔"],["cà rốt","🥕"],["cà chua","🍅"],["hành","🧅"],["tỏi","🧄"]
+];
 
 // ====== STATE ======
 let order=DATA.map((_,i)=>i);
@@ -499,12 +534,22 @@ let mcqState=null; // persist options until correct
 function shuffle(arr){for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}return arr}
 function isVI(text){return /[àáảãạăằắẳẵặâầấẩẫậêềếểễệìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵđ]/i.test(text)}
 
-// emojiForVI bây giờ trả về ký tự emoji (an toàn, không HTML)
+// emojiForVI: tìm emoji phù hợp dựa trên EMOJI_MAP -> FALLBACK_KEYWORDS
 function emojiForVI(text){
   if(!document.getElementById('imgToggle')?.checked) return '';
-  text=(text||'').toLowerCase();
-  let key=Object.keys(IMG).find(k=> text.includes(k));
-  return key? IMG[key] : '';
+  if(!text) return '';
+  const t = text.toString().toLowerCase();
+  // exact or phrase match from EMOJI_MAP
+  for(const k of Object.keys(EMOJI_MAP)){
+    if(t.includes(k)) return EMOJI_MAP[k];
+  }
+  // fallback by keywords
+  for(const [kw,emo] of FALLBACK_KEYWORDS){
+    if(t.includes(kw)) return emo;
+  }
+  // last resort: simple food emoji if contains common food letters
+  if(/\b(cơm|mì|bánh|bò|gà|cá|tôm|rau|trứng)\b/.test(t)) return '🍽️';
+  return '';
 }
 
 function showCenter(msg){const ov=document.getElementById('centerOverlay'); const box=document.getElementById('centerBox'); box.textContent=msg; ov.style.display='flex'; setTimeout(()=>{ov.style.display='none'}, 900)}

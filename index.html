@@ -54,14 +54,11 @@
    .match-wrap{grid-template-columns:1fr 1fr}
    .wrap{padding-bottom:100px}
  }
- 
-/* Thu nhỏ kích thước selector nhóm từ vựng */
-#groupSelect {
-    padding: 8px 12px;
-    font-size: 14px;
-    width: auto;
-    max-width: 120px; /* ≈ bằng chiều rộng nút "Nối cặp" */
-}
+
+ /* Thu nhỏ kích thước selector nhóm từ vựng (không đổi layout) */
+ #groupSelect{
+   padding:8px 12px; font-size:14px; width:auto; max-width:120px;
+ }
 </style>
 </head>
 <body>
@@ -128,7 +125,6 @@
 
 <script>
 // ====== GROUPS & DATA ======
-// Mỗi key trùng CHÍNH XÁC tên file Word (không kèm phần mở rộng)
 const GROUPS = {
   "__Builtin__": [
     {"kr": "맛있다", "vi": "ngon"},
@@ -146,7 +142,6 @@ const GROUPS = {
     {"kr": "담백하다", "vi": "thanh đạm"}
   ],
 
-  // ===== 1) 50 từ vựng tình huống bếp =====
   "50 TỪ VÙNG DIỄN TẢ TÌNH HUỐNG SẼ XẢY RA TRONG BẾP": [
     {"kr":"씻다","vi":"Rửa"},
     {"kr":"해동하다","vi":"Rã đông"},
@@ -200,7 +195,6 @@ const GROUPS = {
     {"kr":"손님이 빨리 달라고 하다","vi":"Khách gọi món gấp"}
   ],
 
-  // ===== 2) Gia vị & phương pháp nấu (bản (1)) =====
   ". Từ vựng tiếng Hàn về gia vị nấu ăn (1)": [
     {"kr":"설탕","vi":"Đường"},
     {"kr":"소금","vi":"Muối"},
@@ -233,7 +227,6 @@ const GROUPS = {
     {"kr":"맛을 보다","vi":"Nêm nếm"}
   ],
 
-  // ===== 3) Đạo cụ bếp (bản (1)) =====
   "đạo cụ bếp (1)": [
     {"kr":"칼, 식칼","vi":"Dao"},
     {"kr":"숟가락","vi":"Muỗng, thìa"},
@@ -264,7 +257,6 @@ const GROUPS = {
     {"kr":"즙서기","vi":"Máy ép"}
   ],
 
-  // ===== 4) Gia vị & phương pháp nấu (bản không (1)) =====
   ". Từ vựng tiếng Hàn về gia vị nấu ăn": [
     {"kr":"설탕","vi":"Đường"},
     {"kr":"소금","vi":"Muối"},
@@ -297,38 +289,6 @@ const GROUPS = {
     {"kr":"맛을 보다","vi":"Nêm nếm"}
   ],
 
-  // ===== 5) Đạo cụ bếp (bản không (1)) =====
-  "đạo cụ bếp": [
-    {"kr":"칼, 식칼","vi":"Dao"},
-    {"kr":"숟가락","vi":"Muỗng, thìa"},
-    {"kr":"포크","vi":"Nĩa"},
-    {"kr":"집게","vi":"Kẹp (gắp đồ ăn)"},
-    {"kr":"국자","vi":"Muôi, vá (múc canh)"},
-    {"kr":"뒤집개","vi":"Xẻng (nấu ăn)"},
-    {"kr":"그릇","vi":"Tô"},
-    {"kr":"밥그릇","vi":"Chén, bát cơm"},
-    {"kr":"접시","vi":"Đĩa"},
-    {"kr":"컵","vi":"Cốc, ly"},
-    {"kr":"유리잔","vi":"Cốc, ly thủy tinh"},
-    {"kr":"도마","vi":"Thớt"},
-    {"kr":"주걱","vi":"Vá múc cơm"},
-    {"kr":"뚜껑","vi":"Nắp"},
-    {"kr":"전기밥솥","vi":"Nồi cơm điện"},
-    {"kr":"대야","vi":"Thau, chậu"},
-    {"kr":"소쿠리","vi":"Rổ tre"},
-    {"kr":"냄비","vi":"Nồi, xoong"},
-    {"kr":"프라이팬","vi":"Chảo"},
-    {"kr":"오븐","vi":"Lò nướng"},
-    {"kr":"전자레인지","vi":"Lò vi sóng"},
-    {"kr":"냉장고","vi":"Tủ lạnh"},
-    {"kr":"난로","vi":"Bếp lò"},
-    {"kr":"식탁","vi":"Bàn ăn"},
-    {"kr":"식기세척기","vi":"Máy rửa chén"},
-    {"kr":"믹서기","vi":"Máy xay sinh tố"},
-    {"kr":"즙서기","vi":"Máy ép"}
-  ],
-
-  // ===== 6) Nguyên liệu (docx3) =====
   "Từ vựng tiếng Hàn về nhà bếp.docx3": [
     {"kr":"소고기","vi":"thịt bò"},
     {"kr":"돼지고기","vi":"thịt lợn"},
@@ -368,7 +328,6 @@ const GROUPS = {
     {"kr":"땅콩","vi":"đậu phộng, lạc"}
   ],
 
-  // ===== 7) Dụng cụ nấu ăn (docx 2) =====
   "Từ vựng tiếng Hàn về nhà bếp.docx 2": [
     {"kr":"냄비","vi":"nồi, xoong"},
     {"kr":"프라이팬","vi":"chảo"},
@@ -400,7 +359,6 @@ const GROUPS = {
     {"kr":"이쑤시개","vi":"tăm"}
   ],
 
-  // ===== 8) Phương pháp nấu ăn (docx) =====
   "Từ vựng tiếng Hàn về nhà bếp": [
     {"kr":"볶다","vi":"chiên, xào sử dụng ít dầu (chiên cơm, xào rau,…)"},
     {"kr":"튀기다","vi":"chiên ngập dầu"},
@@ -433,7 +391,6 @@ const GROUPS = {
     {"kr":"국에 맛을 내다","vi":"nêm gia vị vào canh"}
   ],
 
-  // ===== 9) Miêu tả món ăn (docx4) =====
   "Từ vựng tiếng Hàn về miêu tả.docx4": [
     {"kr":"맛있다","vi":"ngon"},
     {"kr":"맛없다","vi":"không ngon"},
@@ -451,18 +408,18 @@ const GROUPS = {
   ]
 };
 
-let currentGroup = "__Builtin__";
+let currentGroup="__Builtin__";
 let DATA = GROUPS[currentGroup];
 
 // ====== IMG ======
-const IMG = {"ngon": "🤤", "không ngon": "😖", "ngọt": "🍬", "mặn": "🧂", "hơi mặn": "🧂", "chua": "🍋", "cay": "🌶️", "đắng": "☕", "nhạt": "💧", "tươi": "🥗", "mềm": "🧈", "béo ngậy": "🧀", "thanh đạm": "🫖"};
+const IMG={"ngon":"🤤","không ngon":"😖","ngọt":"🍬","mặn":"🧂","hơi mặn":"🧂","chua":"🍋","cay":"🌶️","đắng":"☕","nhạt":"💧","tươi":"🥗","mềm":"🧈","béo ngậy":"🧀","thanh đạm":"🫖"};
 
 // ====== STATE ======
-let order = DATA.map((_,i)=>i);
-let idx = 0, score = 0, mode = 'flash', langDir = 'kr2vi';
-let countdown = 60, timerId;
-let selectedLeft = null; // for match
-let mcqState = null; // persist options until correct
+let order=DATA.map((_,i)=>i);
+let idx=0, score=0, mode='flash', langDir='kr2vi';
+let countdown=60, timerId;
+let selectedLeft=null; // for match
+let mcqState=null; // persist options until correct
 
 // ====== UTIL ======
 function shuffle(arr){for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}return arr}
@@ -470,50 +427,40 @@ function isVI(text){return /[àáảãạăằắẳẵặâầấẩẫậêề
 function emojiForVI(text){if(!document.getElementById('imgToggle')?.checked) return ''; text=(text||'').toLowerCase(); let key=Object.keys(IMG).find(k=> text.includes(k)); return key? `<span class="img">${IMG[key]}</span>`:''}
 function showCenter(msg){const ov=document.getElementById('centerOverlay'); const box=document.getElementById('centerBox'); box.textContent=msg; ov.style.display='flex'; setTimeout(()=>{ov.style.display='none'}, 900)}
 function shuffleAll(){shuffle(order); idx=0; mcqState=null; render(); showCenter('Đã trộn bộ từ!')}
-function switchMode(m){document.querySelectorAll('section').forEach(s=>s.classList.add('hidden'));document.getElementById(m).classList.remove('hidden');mode=m; if(m==='match') setupMatch(); if(m==='mcq') mcqState=null; render(); window.scrollTo({top:0, behavior:'smooth'});}
-function resetGame(){langDir=document.getElementById('langDir').value;idx=0; mcqState=null; if(mode==='match') setupMatch(); render()}
+function switchMode(m){document.querySelectorAll('section').forEach(s=>s.classList.add('hidden'));document.getElementById(m).classList.remove('hidden');mode=m; if(m==='match') setupMatch(true); if(m==='mcq') mcqState=null; render(); window.scrollTo({top:0, behavior:'smooth'});}
+function resetGame(){langDir=document.getElementById('langDir').value;idx=0; mcqState=null; if(mode==='match') setupMatch(true); render()}
 function currentPair(){return DATA[order[idx]]}
 function render(){document.getElementById('score').textContent=score;document.getElementById('timer').textContent=countdown; if(mode==='flash') renderFlash(); if(mode==='mcq') renderMCQ(); if(mode==='match') renderMatch(); if(mode==='spell') renderSpell();}
 
-// ====== Group handling ======
+// ====== NEW: Group handling ======
 function populateGroupSelector(){
-  const sel = document.getElementById('groupSelect');
-  sel.innerHTML = '';
+  const sel=document.getElementById('groupSelect');
+  sel.innerHTML='';
   Object.keys(GROUPS).forEach(name=>{
-    const opt=document.createElement('option');
-    opt.value = name;
-    opt.textContent = name; // hiển thị đúng tên file (không đuôi)
-    sel.appendChild(opt);
+    const opt=document.createElement('option'); opt.value=name; opt.textContent=name; sel.appendChild(opt);
   });
-  sel.value = currentGroup;
+  sel.value=currentGroup;
 }
 function switchGroup(name){
   if(!GROUPS[name]) return;
-  currentGroup = name;
-  DATA = GROUPS[name];
-
-  // Reset trạng thái (giữ nguyên mode, không reload)
-  order = DATA.map((_,i)=>i);
-  shuffle(order);
-  idx = 0;
-  score = 0;
-  mcqState = null;
-  selectedLeft = null;
-
-  if(mode==='match') setupMatch();
-  render();
-  showCenter('Đã chuyển nhóm: ' + name);
+  currentGroup=name; DATA=GROUPS[name];
+  order = DATA.map((_,i)=>i); shuffle(order);
+  idx=0; score=0; mcqState=null; selectedLeft=null;
+  // reset nối cặp theo nhóm mới
+  setupMatch(true);
+  render(); showCenter('Đã chuyển nhóm: '+name);
 }
 
 // ====== TOUCH SWIPE FOR FLASH ======
-let touchStartX=null; document.addEventListener('touchstart',e=>{touchStartX=e.changedTouches[0].screenX},{passive:true});
+let touchStartX=null;
+document.addEventListener('touchstart',e=>{touchStartX=e.changedTouches[0].screenX},{passive:true});
 document.addEventListener('touchend',e=>{if(touchStartX==null) return; let dx=e.changedTouches[0].screenX - touchStartX; if(Math.abs(dx)>50){ idx=(idx + (dx<0?1:-1) + DATA.length)%DATA.length; renderFlash(); } touchStartX=null;},{passive:true});
 
 // ====== FLASH ======
 function renderFlash(){const p=currentPair(); const front= langDir==='kr2vi'? `${p.kr}` : `${p.vi}`; const back = langDir==='kr2vi'? `${emojiForVI(p.vi)} ${p.vi}` : p.kr; const f=document.getElementById('flashFront'); const b=document.getElementById('flashBack'); f.innerHTML=front; b.innerHTML='(chạm để xem)'; const card=document.getElementById('flashCard'); card.onclick=()=>{b.innerHTML=back;};}
 
 // ====== AUDIO + HAPTIC ======
-let audioCtx = null;
+let audioCtx=null;
 function initAudio(){if(!audioCtx){try{audioCtx=new (window.AudioContext||window.webkitAudioContext)();}catch(e){audioCtx=null;}}}
 function beep({freq=880,dur=120,type='sine',vol=0.1}={}){if(!audioCtx) return; const o=audioCtx.createOscillator(); const g=audioCtx.createGain(); o.type=type; o.frequency.value=freq; g.gain.value=vol; o.connect(g); g.connect(audioCtx.destination); o.start(); setTimeout(()=>{o.stop()}, dur);}
 function sfxCorrect(){beep({freq:1046,dur:120,type:'triangle',vol:0.08}); setTimeout(()=>beep({freq:1318,dur:120,type:'triangle',vol:0.08}),120)}
@@ -523,32 +470,103 @@ window.addEventListener('pointerdown',()=>{initAudio(); if(audioCtx?.state==='su
 
 // ====== MCQ ======
 function buildMCQState(){const i=order[idx]; const p=DATA[i]; const q = langDir==='kr2vi'? p.kr : p.vi; const answer = langDir==='kr2vi'? p.vi : p.kr; const pickWrong=(correctIndex,n=3)=>{const pool=[...Array(DATA.length).keys()].filter(k=>k!==correctIndex);shuffle(pool);return pool.slice(0,n)}; let opts=[answer,...pickWrong(i).map(j=> langDir==='kr2vi'? DATA[j].vi : DATA[j].kr)]; shuffle(opts); return {i, q, answer, opts, tried:new Set()}; }
-function renderMCQ(){ if(!mcqState || mcqState.i!==order[idx]) mcqState = buildMCQState(); const {q, answer, opts} = mcqState; document.getElementById('mcqQ').textContent=q; const box=document.getElementById('mcqOptions'); box.innerHTML=''; opts.forEach(opt=>{const div=document.createElement('div'); div.className='mcq-option'; div.innerHTML=(isVI(opt)? emojiForVI(opt):'') + '<span>'+opt+'</span>'; div.onclick=()=>{initAudio(); if(opt===answer){div.classList.add('correct'); score++; sfxCorrect(); vibrate([20,30,20]); showCenter('Thùy Châm cutii giỏi quá !!!'); setTimeout(()=>{ idx=(idx+1)%DATA.length; mcqState=null; renderMCQ(); }, 380); }
- else {div.classList.add('wrong'); sfxWrong(); vibrate([50,30,50]); document.getElementById('mcq').classList.add('shake'); setTimeout(()=>document.getElementById('mcq').classList.remove('shake'), 320); showCenter('Khum sao làm lại pé ơi'); }
- render();
- }; box.appendChild(div);}); }
+function renderMCQ(){
+  if(!mcqState || mcqState.i!==order[idx]) mcqState = buildMCQState();
+  const {q, answer, opts} = mcqState;
+  document.getElementById('mcqQ').textContent=q;
+  const box=document.getElementById('mcqOptions'); box.innerHTML='';
+  opts.forEach(opt=>{
+    const div=document.createElement('div'); div.className='mcq-option';
+    div.innerHTML=(isVI(opt)? emojiForVI(opt):'') + '<span>'+opt+'</span>';
+    div.onclick=()=>{
+      initAudio();
+      box.classList.add('disable-pointer'); // khóa tạm khi chọn
+      if(opt===answer){
+        div.classList.add('correct'); score++; sfxCorrect(); vibrate([20,30,20]); showCenter('Thùy Châm cutii giỏi quá !!!');
+        setTimeout(()=>{ idx=(idx+1)%DATA.length; mcqState=null; renderMCQ(); box.classList.remove('disable-pointer'); render(); },380);
+      }else{
+        div.classList.add('wrong'); sfxWrong(); vibrate([50,30,50]); document.getElementById('mcq').classList.add('shake');
+        setTimeout(()=>document.getElementById('mcq').classList.remove('shake'),320);
+        showCenter('Khum sao làm lại pé ơi'); setTimeout(()=>box.classList.remove('disable-pointer'),320); render();
+      }
+    };
+    box.appendChild(div);
+  });
+}
 
 // ====== MATCH ======
-let matchPairs=[]; let leftItems=[]; let rightItems=[];
-function setupMatch(){selectedLeft=null; matchPairs = shuffle(order.slice(0)).slice(0, Math.min(10, DATA.length));
- if(langDir==='kr2vi'){
-  leftItems = matchPairs.map(i=>({i, text: DATA[i].kr, isVI:false}));
-  rightItems = shuffle(matchPairs.map(i=>({i, text: DATA[i].vi, isVI:true})));
- } else {
-  leftItems = matchPairs.map(i=>({i, text: DATA[i].vi, isVI:true}));
-  rightItems = shuffle(matchPairs.map(i=>({i, text: DATA[i].kr, isVI:false})));
- }
+// THAY ĐỔI NHẸ: chia thành nhiều đợt 10 cặp, nối xong đợt này sẽ tự hiển thị đợt kế tiếp cho đến hết
+let matchPairs=[];      // cặp trong đợt hiện tại (tối đa 10)
+let matchQueue=[];      // hàng đợi còn lại (chỉ số theo order)
+let leftItems=[]; let rightItems=[];
+/** khởi tạo/đặt lại chế độ nối cặp.
+ * @param {boolean} resetQueue - true: tạo hàng đợi mới (khi vào mode, đổi nhóm, đổi chiều)
+ */
+function setupMatch(resetQueue=false){
+  selectedLeft=null;
+  if(resetQueue || !matchQueue.length){
+    // tạo hàng đợi từ toàn bộ chỉ số của bộ từ hiện tại
+    matchQueue = shuffle(order.slice(0));
+  }
+  loadNextMatchBatch();
 }
-function renderMatch(){const L=document.getElementById('matchLeft'); const R=document.getElementById('matchRight'); L.innerHTML=''; R.innerHTML='';
- leftItems.forEach((l,idxL)=>{const a=document.createElement('div'); a.className='tile'; a.innerHTML= (l.isVI? emojiForVI(l.text):'') + '<span>'+l.text+'</span>'; a.dataset.index=idxL; a.onclick=()=>{document.querySelectorAll('#matchLeft .tile').forEach(t=>t.classList.remove('selected')); a.classList.add('selected'); selectedLeft={i:l.i, el:a, idx: idxL};}; L.appendChild(a)});
- rightItems.forEach((r,idxR)=>{const b=document.createElement('div'); b.className='tile'; b.innerHTML= (r.isVI? emojiForVI(r.text):'') + '<span>'+r.text+'</span>'; b.dataset.index=idxR; b.onclick=()=>{initAudio(); if(!selectedLeft) return; const left=selectedLeft; if(left.i===r.i){ b.classList.add('correct'); left.el.classList.add('correct'); score++; sfxCorrect(); vibrate([20,30,20]); showCenter('Thùy Châm cutii giỏi quá !!!'); setTimeout(()=>{ leftItems.splice(left.idx,1); rightItems.splice(idxR,1); selectedLeft=null; renderMatch(); if(leftItems.length===0){ showCenter('Hoàn thành tất cả cặp! Tuyệt 👏'); } render(); }, 320);
- } else { b.classList.add('wrong'); left.el.classList.add('wrong'); sfxWrong(); vibrate([60,30,60]); document.getElementById('match').classList.add('shake'); setTimeout(()=>{b.classList.remove('wrong'); left.el.classList.remove('wrong'); document.getElementById('match').classList.remove('shake');}, 380); showCenter('Khum sao làm lại pé ơi'); }
- }; R.appendChild(b)});
+function loadNextMatchBatch(){
+  // lấy tối đa 10 chỉ số tiếp theo
+  matchPairs = matchQueue.splice(0, Math.min(10, matchQueue.length));
+  // nếu không còn gì (trường hợp DATA < 1), giữ mảng rỗng để render
+  if(langDir==='kr2vi'){
+    leftItems  = matchPairs.map(i=>({i, text: DATA[i].kr, isVI:false}));
+    rightItems = shuffle(matchPairs.map(i=>({i, text: DATA[i].vi, isVI:true})));
+  }else{
+    leftItems  = matchPairs.map(i=>({i, text: DATA[i].vi, isVI:true}));
+    rightItems = shuffle(matchPairs.map(i=>({i, text: DATA[i].kr, isVI:false})));
+  }
+}
+function renderMatch(){
+  const L=document.getElementById('matchLeft'); const R=document.getElementById('matchRight'); L.innerHTML=''; R.innerHTML='';
+  leftItems.forEach((l,idxL)=>{
+    const a=document.createElement('div'); a.className='tile'; a.innerHTML=(l.isVI? emojiForVI(l.text):'')+'<span>'+l.text+'</span>'; a.dataset.index=idxL;
+    a.onclick=()=>{document.querySelectorAll('#matchLeft .tile').forEach(t=>t.classList.remove('selected')); a.classList.add('selected'); selectedLeft={i:l.i, el:a, idx: idxL};};
+    L.appendChild(a)
+  });
+  rightItems.forEach((r,idxR)=>{
+    const b=document.createElement('div'); b.className='tile'; b.innerHTML=(r.isVI? emojiForVI(r.text):'')+'<span>'+r.text+'</span>'; b.dataset.index=idxR;
+    b.onclick=()=>{
+      initAudio(); if(!selectedLeft) return; const left=selectedLeft;
+      if(left.i===r.i){
+        b.classList.add('correct'); left.el.classList.add('correct'); score++; sfxCorrect(); vibrate([20,30,20]); showCenter('Thùy Châm cutii giỏi quá !!!');
+        setTimeout(()=>{
+          leftItems.splice(left.idx,1); rightItems.splice(idxR,1); selectedLeft=null; 
+          // nếu đã hết cặp trong đợt hiện tại
+          if(leftItems.length===0){
+            if(matchQueue.length>0){
+              // còn cặp tiếp theo: nạp đợt mới và tiếp tục
+              loadNextMatchBatch();
+              renderMatch();
+              showCenter('Tiếp tục đợt mới 👏');
+            }else{
+              // không còn cặp nào: hoàn tất toàn bộ
+              renderMatch();
+              showCenter('Hoàn thành tất cả cặp! Tuyệt 👏');
+            }
+          }else{
+            renderMatch();
+          }
+          render();
+        },320);
+      }else{
+        b.classList.add('wrong'); left.el.classList.add('wrong'); sfxWrong(); vibrate([60,30,60]); document.getElementById('match').classList.add('shake');
+        setTimeout(()=>{b.classList.remove('wrong'); left.el.classList.remove('wrong'); document.getElementById('match').classList.remove('shake');},380);
+        showCenter('Khum sao làm lại pé ơi');
+      }
+    };
+    R.appendChild(b)
+  });
 }
 
 // ====== SPELL ======
 let spellAnswer='';
-function renderSpell(){const p=currentPair(); const q= langDir==='kr2vi'? p.kr : p.vi; const ans = langDir==='kr2vi'? p.vi : p.kr; document.getElementById('spellQ').textContent=q; document.getElementById('spellTip').textContent='Gợi ý: '+ (ans.length>2? ans[0]+'...' : ''); spellAnswer=ans; const inp=document.getElementById('spellIn'); inp.value=''; inp.focus();}
+function renderSpell(){const p=currentPair(); const q= langDir==='kr2vi'? p.kr : p.vi; const ans = langDir==='kr2vi'? p.vi : p.kr; document.getElementById('spellQ').textContent=q; document.getElementById('spellTip').textContent='Gợi ý: '+(ans.length>2? ans[0]+'...' : ''); spellAnswer=ans; const inp=document.getElementById('spellIn'); inp.value=''; inp.focus();}
 function checkSpell(){initAudio(); const val=document.getElementById('spellIn').value.trim(); if(!val) return; if(val.normalize('NFC').toLowerCase()===spellAnswer.normalize('NFC').toLowerCase()){score++; sfxCorrect(); vibrate([20,30,20]); showCenter('Thùy Châm cutii giỏi quá !!!'); idx=(idx+1)%DATA.length; renderSpell();} else {sfxWrong(); vibrate([60,30,60]); showCenter('Khum sao làm lại pé ơi')} render();}
 
 // ====== TIMER ======
@@ -559,7 +577,8 @@ function restartTimer(){clearInterval(timerId); countdown=60; timerId=setInterva
 populateGroupSelector();
 order = DATA.map((_,i)=>i);
 shuffle(order);
-setupMatch();
+// Khởi tạo nối cặp với hàng đợi toàn bộ, hiển thị 10 cặp mỗi đợt
+setupMatch(true);
 restartTimer();
 render();
 </script>

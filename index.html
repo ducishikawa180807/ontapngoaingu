@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -8,13 +7,88 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <title>Ôn tập tiếng Hàn — Miêu tả món ăn (v5)</title>
 <style>
- :root{--bg:#0f172a;--card:#111827;--pri:#22d3ee;--ok:#22c55e;--bad:#ef4444;--text:#e5e7eb;--muted:#9ca3af}
+ :root{
+   --bg:#0f172a;--card:#111827;--pri:#22d3ee;--ok:#22c55e;--bad:#ef4444;--text:#e5e7eb;--muted:#9ca3af;
+
+   /* Cute panda background (embedded SVG data URI) */
+   --panda-bg: url("data:image/svg+xml;utf8, \
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'> \
+  <defs> \
+    <linearGradient id='g' x1='0' y1='0' x2='0' y2='1'> \
+      <stop offset='0%' stop-color='%23e6f5ea'/> \
+      <stop offset='100%' stop-color='%23d8f0e2'/> \
+    </linearGradient> \
+  </defs> \
+  <rect width='100%' height='100%' fill='url(%23g)'/> \
+  <!-- soft leaves --> \
+  <g fill='%2395c7a5' opacity='0.18'> \
+    <path d='M40 50 l20 -6 l-12 18 z'/> \
+    <path d='M520 70 l22 -6 l-12 18 z'/> \
+    <path d='M120 320 l24 -8 l-10 20 z'/> \
+  </g> \
+  <!-- cute panda centered --> \
+  <g transform='translate(300 200)'> \
+    <!-- body shadow --> \
+    <ellipse cx='0' cy='110' rx='160' ry='60' fill='%23000000' opacity='0.06'/> \
+    <!-- body --> \
+    <ellipse cx='0' cy='70' rx='120' ry='80' fill='%23ffffff'/> \
+    <!-- ears --> \
+    <ellipse cx='-72' cy='-34' rx='32' ry='36' fill='%23222'/> \
+    <ellipse cx='72' cy='-34' rx='32' ry='36' fill='%23222'/> \
+    <!-- eye patches --> \
+    <ellipse cx='-45' cy='-10' rx='34' ry='38' fill='%23222'/> \
+    <ellipse cx='45' cy='-10' rx='34' ry='38' fill='%23222'/> \
+    <!-- eyes glint --> \
+    <circle cx='-45' cy='-6' r='10' fill='%23ffffff'/> \
+    <circle cx='45' cy='-6' r='10' fill='%23ffffff'/> \
+    <circle cx='-50' cy='-4' r='4' fill='%23000'/> \
+    <circle cx='40' cy='-4' r='4' fill='%23000'/> \
+    <!-- nose & mouth --> \
+    <ellipse cx='0' cy='10' rx='10' ry='8' fill='%23000'/> \
+    <path d='M -12 22 Q 0 32 12 22' stroke='%23000' stroke-width='3' stroke-linecap='round' fill='none'/> \
+    <!-- blush --> \
+    <circle cx='-28' cy='18' r='12' fill='%23ffb6c1' opacity='0.9'/> \
+    <circle cx='28' cy='18' r='12' fill='%23ffb6c1' opacity='0.9'/> \
+    <!-- little paw --> \
+    <ellipse cx='-90' cy='80' rx='22' ry='14' fill='%23222' opacity='0.9'/> \
+    <ellipse cx='90' cy='80' rx='22' ry='14' fill='%23222' opacity='0.9'/> \
+  </g> \
+</svg>");
+ }
  *{box-sizing:border-box;-webkit-tap-highlight-color: transparent}
  html, body{height:100%;}
- body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,'Noto Sans',sans-serif;background:linear-gradient(120deg,#0f172a,#0b1023);color:var(--text);min-height:100dvh;}
+ body{
+   margin:0;
+   font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,'Noto Sans',sans-serif;
+   /* Fallback gradient + Panda background image (cover/center/no-repeat) */
+   background:
+     linear-gradient(120deg,#0f172a,#0b1023);
+   color:var(--text);
+   min-height:100dvh;
+   position:relative; /* for overlay pseudo element */
+ }
+ /* ===== Background image layer (behind everything, does not affect layout) ===== */
+ body::before{
+   content:"";
+   position:fixed; inset:0; z-index:0;
+   background-image: var(--panda-bg);
+   background-size: cover;         /* cover as requested */
+   background-position: center;    /* center as requested */
+   background-repeat: no-repeat;   /* no-repeat as requested */
+   opacity: 0.95;                  /* keep it soft */
+   pointer-events:none;            /* never block interactions */
+ }
+ /* ===== Soft overlay to guarantee readability (stays above bg, below app) ===== */
+ body::after{
+   content:"";
+   position:fixed; inset:0; z-index:0;
+   background: rgba(255,255,255,0.55); /* gentle white veil to improve contrast */
+   pointer-events:none;
+ }
+
  header{padding:16px 12px;text-align:center;position:sticky;top:0;background:linear-gradient(120deg,#0f172a,#0b1023);z-index:10}
  header h1{margin:0;font-size:clamp(18px,4.5vw,26px)}
- .wrap{max-width:1100px;margin:0 auto;padding:10px 12px 84px}
+ .wrap{max-width:1100px;margin:0 auto;padding:10px 12px 84px; position:relative; z-index:1;} /* ensure above overlay */
  /* Sticky bottom nav for mobile */
  nav{position:fixed;left:0;right:0;bottom:0;background:#0b1220cc;backdrop-filter:blur(6px);display:flex;gap:8px;flex-wrap:nowrap;overflow-x:auto;padding:10px 12px;border-top:1px solid #334155;z-index:20}
  nav::-webkit-scrollbar{display:none}
@@ -22,14 +96,13 @@
  button,select{background:var(--card);color:var(--text);border:1px solid #334155;border-radius:12px;padding:12px 14px;cursor:pointer;font-size:16px}
  button:active{transform:scale(0.98)}
  .pill{border-radius:999px}
- .card{background:radial-gradient(1200px 600px at -10% -30%,#1f2937,transparent),var(--card);border:1px solid #334155;border-radius:16px;padding:14px;margin-bottom:12px}
+ .card{background:radial-gradient(1200px 600px at -10% -30%,#1f2937,transparent),var(--card);border:1px solid #334155;border-radius:16px;padding:14px;margin-bottom:12px; position:relative; z-index:1;}
  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
  .hidden{display:none}
  .score{font-weight:700}
  .tag{font-size:12px;color:var(--muted)}
  .k{font-size:clamp(18px,5vw,24px)}
  .v{color:#94a3b8}
- .timer{font-variant-numeric:tabular-nums}
  .mcq-option{padding:14px;border:1px solid #334155;border-radius:14px;background:#0b1220;cursor:pointer;display:flex;align-items:center;gap:10px;min-height:56px}
  .mcq-option .img{font-size:22px}
  .mcq-option.correct{border-color:var(--ok);background:#052915}
@@ -54,11 +127,8 @@
    .match-wrap{grid-template-columns:1fr 1fr}
    .wrap{padding-bottom:100px}
  }
-
  /* Thu nhỏ kích thước selector nhóm từ vựng (không đổi layout) */
- #groupSelect{
-   padding:8px 12px; font-size:14px; width:auto; max-width:120px;
- }
+ #groupSelect{padding:8px 12px;font-size:14px;width:auto;max-width:120px;}
 </style>
 </head>
 <body>
@@ -68,10 +138,17 @@
 <div class="wrap">
   <section id="flash" class="card">
     <h2>Flashcards</h2>
-    <div id="flashCard" class="card" style="text-align:center;cursor:pointer">
+    <!-- thêm tabindex để có thể focus bằng bàn phím -->
+    <div id="flashCard" class="card" style="text-align:center;cursor:pointer" tabindex="0" role="button" aria-pressed="false">
       <div class="k" id="flashFront"></div>
       <div class="v" id="flashBack" style="margin-top:8px"></div>
       <div class="tag">Chạm để lật / vuốt ◀ ▶ để chuyển</div>
+    </div>
+
+    <!-- Flash navigation: Back / Next (mobile + desktop friendly) -->
+    <div class="flash-controls" style="display:flex;gap:8px;justify-content:center;margin-top:10px;">
+      <button id="flashPrev" onclick="flashPrev()" class="pill" aria-label="Quay lại từ trước">◀ Back</button>
+      <button id="flashNext" onclick="flashNext()" class="pill" aria-label="Tiếp theo từ">Next ▶</button>
     </div>
   </section>
 
@@ -117,8 +194,6 @@
   </label>
   <button onclick="shuffleAll()">🔀 Trộn</button>
   <span class="score">Điểm: <span id="score">0</span></span>
-  <span class="timer">⏱️ <span id="timer">60</span>s</span>
-  <button onclick="restartTimer()">↻</button>
 </nav>
 
 <div id="centerOverlay"><div id="centerBox"></div></div>
@@ -126,7 +201,7 @@
 <script>
 // ====== GROUPS & DATA ======
 const GROUPS = {
-  "__Builtin__": [
+  "Nhóm Từ": [
     {"kr": "맛있다", "vi": "ngon"},
     {"kr": "맛없다", "vi": "không ngon"},
     {"kr": "달다", "vi": "ngọt"},
@@ -408,7 +483,7 @@ const GROUPS = {
   ]
 };
 
-let currentGroup="__Builtin__";
+let currentGroup="Nhóm Từ";
 let DATA = GROUPS[currentGroup];
 
 // ====== IMG ======
@@ -417,49 +492,89 @@ const IMG={"ngon":"🤤","không ngon":"😖","ngọt":"🍬","mặn":"🧂","h�
 // ====== STATE ======
 let order=DATA.map((_,i)=>i);
 let idx=0, score=0, mode='flash', langDir='kr2vi';
-let countdown=60, timerId;
 let selectedLeft=null; // for match
 let mcqState=null; // persist options until correct
 
 // ====== UTIL ======
 function shuffle(arr){for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}return arr}
 function isVI(text){return /[àáảãạăằắẳẵặâầấẩẫậêềếểễệìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵđ]/i.test(text)}
-function emojiForVI(text){if(!document.getElementById('imgToggle')?.checked) return ''; text=(text||'').toLowerCase(); let key=Object.keys(IMG).find(k=> text.includes(k)); return key? `<span class="img">${IMG[key]}</span>`:''}
+
+// emojiForVI bây giờ trả về ký tự emoji (an toàn, không HTML)
+function emojiForVI(text){
+  if(!document.getElementById('imgToggle')?.checked) return '';
+  text=(text||'').toLowerCase();
+  let key=Object.keys(IMG).find(k=> text.includes(k));
+  return key? IMG[key] : '';
+}
+
 function showCenter(msg){const ov=document.getElementById('centerOverlay'); const box=document.getElementById('centerBox'); box.textContent=msg; ov.style.display='flex'; setTimeout(()=>{ov.style.display='none'}, 900)}
-function shuffleAll(){shuffle(order); idx=0; mcqState=null; render(); showCenter('Đã trộn bộ từ!')}
+function shuffleAll(){if(DATA.length===0){showCenter('Nhóm rỗng — không thể trộn'); return;} shuffle(order); idx=0; mcqState=null; render(); showCenter('Đã trộn bộ từ!')}
 function switchMode(m){document.querySelectorAll('section').forEach(s=>s.classList.add('hidden'));document.getElementById(m).classList.remove('hidden');mode=m; if(m==='match') setupMatch(true); if(m==='mcq') mcqState=null; render(); window.scrollTo({top:0, behavior:'smooth'});}
 function resetGame(){langDir=document.getElementById('langDir').value;idx=0; mcqState=null; if(mode==='match') setupMatch(true); render()}
 function currentPair(){return DATA[order[idx]]}
-function render(){document.getElementById('score').textContent=score;document.getElementById('timer').textContent=countdown; if(mode==='flash') renderFlash(); if(mode==='mcq') renderMCQ(); if(mode==='match') renderMatch(); if(mode==='spell') renderSpell();}
+function render(){document.getElementById('score').textContent=score; if(mode==='flash') renderFlash(); if(mode==='mcq') renderMCQ(); if(mode==='match') renderMatch(); if(mode==='spell') renderSpell();}
 
-// ====== NEW: Group handling ======
-function populateGroupSelector(){
-  const sel=document.getElementById('groupSelect');
-  sel.innerHTML='';
-  Object.keys(GROUPS).forEach(name=>{
-    const opt=document.createElement('option'); opt.value=name; opt.textContent=name; sel.appendChild(opt);
-  });
-  sel.value=currentGroup;
-}
-function switchGroup(name){
-  if(!GROUPS[name]) return;
-  currentGroup=name; DATA=GROUPS[name];
-  order = DATA.map((_,i)=>i); shuffle(order);
-  idx=0; score=0; mcqState=null; selectedLeft=null;
-  // reset nối cặp theo nhóm mới
-  setupMatch(true);
-  render(); showCenter('Đã chuyển nhóm: '+name);
+/* ====== FLASH ====== */
+function renderFlash(){
+  const f=document.getElementById('flashFront');
+  const b=document.getElementById('flashBack');
+  const card=document.getElementById('flashCard');
+
+  if(!DATA || DATA.length===0){
+    f.textContent = 'Nhóm rỗng';
+    b.textContent = 'Vui lòng chọn nhóm khác';
+    card.onclick = null;
+    card.onkeydown = null;
+    return;
+  }
+
+  const p=currentPair();
+  const front= langDir==='kr2vi'? `${p.kr}` : `${p.vi}`;
+  const backText = langDir==='kr2vi'? `${p.vi}` : p.kr;
+  const backEmoji = langDir==='kr2vi'? emojiForVI(p.vi) : '';
+  f.textContent=front;
+  b.textContent='(chạm để xem)';
+
+  function doFlip(){
+    // flip shows back with optional emoji (safe)
+    b.textContent = backEmoji ? (backEmoji + ' ' + backText) : backText;
+  }
+  card.onclick = doFlip;
+
+  card.onkeydown = (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      doFlip();
+    }else if(e.key === 'ArrowRight'){
+      idx = (idx+1) % DATA.length; renderFlash();
+    }else if(e.key === 'ArrowLeft'){
+      idx = (idx-1 + DATA.length) % DATA.length; renderFlash();
+    }
+  };
 }
 
 // ====== TOUCH SWIPE FOR FLASH ======
 let touchStartX=null;
 document.addEventListener('touchstart',e=>{touchStartX=e.changedTouches[0].screenX},{passive:true});
-document.addEventListener('touchend',e=>{if(touchStartX==null) return; let dx=e.changedTouches[0].screenX - touchStartX; if(Math.abs(dx)>50){ idx=(idx + (dx<0?1:-1) + DATA.length)%DATA.length; renderFlash(); } touchStartX=null;},{passive:true});
+document.addEventListener('touchend',e=>{if(touchStartX==null) return; let dx=e.changedTouches[0].screenX - touchStartX; if(Math.abs(dx)>50){ idx=(idx + (dx<0?1:-1) + (DATA.length||1))%(DATA.length||1); renderFlash(); } touchStartX=null;},{passive:true});
 
-// ====== FLASH ======
-function renderFlash(){const p=currentPair(); const front= langDir==='kr2vi'? `${p.kr}` : `${p.vi}`; const back = langDir==='kr2vi'? `${emojiForVI(p.vi)} ${p.vi}` : p.kr; const f=document.getElementById('flashFront'); const b=document.getElementById('flashBack'); f.innerHTML=front; b.innerHTML='(chạm để xem)'; const card=document.getElementById('flashCard'); card.onclick=()=>{b.innerHTML=back;};}
+// Add Next / Back handlers (used by buttons and can be called programmatically)
+function flashPrev(){
+  if(!DATA || DATA.length===0) return;
+  idx = (idx - 1 + DATA.length) % DATA.length;
+  mcqState = null;
+  renderFlash();
+  render();
+}
+function flashNext(){
+  if(!DATA || DATA.length===0) return;
+  idx = (idx + 1) % DATA.length;
+  mcqState = null;
+  renderFlash();
+  render();
+}
 
-// ====== AUDIO + HAPTIC ======
+/* ====== AUDIO + HAPTIC ====== */
 let audioCtx=null;
 function initAudio(){if(!audioCtx){try{audioCtx=new (window.AudioContext||window.webkitAudioContext)();}catch(e){audioCtx=null;}}}
 function beep({freq=880,dur=120,type='sine',vol=0.1}={}){if(!audioCtx) return; const o=audioCtx.createOscillator(); const g=audioCtx.createGain(); o.type=type; o.frequency.value=freq; g.gain.value=vol; o.connect(g); g.connect(audioCtx.destination); o.start(); setTimeout(()=>{o.stop()}, dur);}
@@ -468,19 +583,34 @@ function sfxWrong(){beep({freq:220,dur:160,type:'sawtooth',vol:0.06})}
 function vibrate(pattern){if(navigator.vibrate) navigator.vibrate(pattern)}
 window.addEventListener('pointerdown',()=>{initAudio(); if(audioCtx?.state==='suspended') audioCtx.resume();},{once:true});
 
-// ====== MCQ ======
-function buildMCQState(){const i=order[idx]; const p=DATA[i]; const q = langDir==='kr2vi'? p.kr : p.vi; const answer = langDir==='kr2vi'? p.vi : p.kr; const pickWrong=(correctIndex,n=3)=>{const pool=[...Array(DATA.length).keys()].filter(k=>k!==correctIndex);shuffle(pool);return pool.slice(0,n)}; let opts=[answer,...pickWrong(i).map(j=> langDir==='kr2vi'? DATA[j].vi : DATA[j].kr)]; shuffle(opts); return {i, q, answer, opts, tried:new Set()}; }
+/* ====== MCQ ====== */
+function buildMCQState(){if(!DATA || DATA.length===0) return null; const i=order[idx]; const p=DATA[i]; const q = langDir==='kr2vi'? p.kr : p.vi; const answer = langDir==='kr2vi'? p.vi : p.kr; const pickWrong=(correctIndex,n=3)=>{const pool=[...Array(DATA.length).keys()].filter(k=>k!==correctIndex);shuffle(pool);return pool.slice(0,n)}; let opts=[answer,...pickWrong(i).map(j=> langDir==='kr2vi'? DATA[j].vi : DATA[j].kr)]; shuffle(opts); return {i, q, answer, opts, tried:new Set()}; }
 function renderMCQ(){
+  const mcqQ = document.getElementById('mcqQ');
+  const box=document.getElementById('mcqOptions');
+  if(!DATA || DATA.length===0){
+    mcqQ.textContent = 'Nhóm rỗng';
+    box.innerHTML = '<div class="tag">Không có dữ liệu</div>';
+    return;
+  }
+
   if(!mcqState || mcqState.i!==order[idx]) mcqState = buildMCQState();
   const {q, answer, opts} = mcqState;
-  document.getElementById('mcqQ').textContent=q;
-  const box=document.getElementById('mcqOptions'); box.innerHTML='';
+  mcqQ.textContent=q;
+  box.innerHTML='';
   opts.forEach(opt=>{
-    const div=document.createElement('div'); div.className='mcq-option';
-    div.innerHTML=(isVI(opt)? emojiForVI(opt):'') + '<span>'+opt+'</span>';
-    div.onclick=()=>{
+    const div=document.createElement('div'); div.className='mcq-option'; div.tabIndex=0;
+    const emoji = isVI(opt)? emojiForVI(opt): '';
+    if(emoji){
+      const imgSpan = document.createElement('span'); imgSpan.className='img'; imgSpan.textContent = emoji;
+      div.appendChild(imgSpan);
+    }
+    const txtSpan = document.createElement('span'); txtSpan.textContent = opt;
+    div.appendChild(txtSpan);
+
+    const choose = ()=>{
       initAudio();
-      box.classList.add('disable-pointer'); // khóa tạm khi chọn
+      box.classList.add('disable-pointer');
       if(opt===answer){
         div.classList.add('correct'); score++; sfxCorrect(); vibrate([20,30,20]); showCenter('Thùy Châm cutii giỏi quá !!!');
         setTimeout(()=>{ idx=(idx+1)%DATA.length; mcqState=null; renderMCQ(); box.classList.remove('disable-pointer'); render(); },380);
@@ -490,62 +620,93 @@ function renderMCQ(){
         showCenter('Khum sao làm lại pé ơi'); setTimeout(()=>box.classList.remove('disable-pointer'),320); render();
       }
     };
+
+    div.onclick = choose;
+    div.onkeydown = (e)=>{ if(e.key==='Enter' || e.key===' ') { e.preventDefault(); choose(); } };
     box.appendChild(div);
   });
 }
 
-// ====== MATCH ======
-// THAY ĐỔI NHẸ: chia thành nhiều đợt 10 cặp, nối xong đợt này sẽ tự hiển thị đợt kế tiếp cho đến hết
+/* ====== MATCH ====== */
+// Hiển thị theo đợt 10 cặp; nối xong đợt hiện tại sẽ tự nạp đợt kế tiếp cho đến hết
 let matchPairs=[];      // cặp trong đợt hiện tại (tối đa 10)
 let matchQueue=[];      // hàng đợi còn lại (chỉ số theo order)
 let leftItems=[]; let rightItems=[];
-/** khởi tạo/đặt lại chế độ nối cặp.
- * @param {boolean} resetQueue - true: tạo hàng đợi mới (khi vào mode, đổi nhóm, đổi chiều)
- */
 function setupMatch(resetQueue=false){
   selectedLeft=null;
+  // khi đổi nhóm hoặc muốn reset, tạo hàng đợi mới chỉ từ các chỉ số trong group hiện tại
   if(resetQueue || !matchQueue.length){
-    // tạo hàng đợi từ toàn bộ chỉ số của bộ từ hiện tại
+    // sử dụng order (đã được trộn khi đổi nhóm) nhưng sao chép để không sửa order gốc
     matchQueue = shuffle(order.slice(0));
   }
   loadNextMatchBatch();
 }
 function loadNextMatchBatch(){
-  // lấy tối đa 10 chỉ số tiếp theo
+  // lấy tối đa 10 phần tử từ hàng đợi; nếu hết thì trả về mảng rỗng
   matchPairs = matchQueue.splice(0, Math.min(10, matchQueue.length));
-  // nếu không còn gì (trường hợp DATA < 1), giữ mảng rỗng để render
+  if(matchPairs.length === 0){
+    leftItems = []; rightItems = [];
+    return;
+  }
   if(langDir==='kr2vi'){
-    leftItems  = matchPairs.map(i=>({i, text: DATA[i].kr, isVI:false}));
-    rightItems = shuffle(matchPairs.map(i=>({i, text: DATA[i].vi, isVI:true})));
+    leftItems  = matchPairs.map(i=>({i, text: DATA[i]?.kr || '', isVI:false}));
+    rightItems = shuffle(matchPairs.map(i=>({i, text: DATA[i]?.vi || '', isVI:true})));
   }else{
-    leftItems  = matchPairs.map(i=>({i, text: DATA[i].vi, isVI:true}));
-    rightItems = shuffle(matchPairs.map(i=>({i, text: DATA[i].kr, isVI:false})));
+    leftItems  = matchPairs.map(i=>({i, text: DATA[i]?.vi || '', isVI:true}));
+    rightItems = shuffle(matchPairs.map(i=>({i, text: DATA[i]?.kr || '', isVI:false})));
   }
 }
 function renderMatch(){
   const L=document.getElementById('matchLeft'); const R=document.getElementById('matchRight'); L.innerHTML=''; R.innerHTML='';
+  if(!DATA || DATA.length===0){
+    L.innerHTML = '<div class="tag">Nhóm rỗng</div>'; R.innerHTML = '';
+    return;
+  }
+  if(leftItems.length===0 && rightItems.length===0 && matchQueue.length===0){
+    // đã hoàn thành tất cả cặp trong nhóm
+    L.innerHTML = '<div class="tag">Hoàn thành tất cả cặp trong nhóm 🎉</div>';
+    R.innerHTML = '';
+    return;
+  }
+
   leftItems.forEach((l,idxL)=>{
-    const a=document.createElement('div'); a.className='tile'; a.innerHTML=(l.isVI? emojiForVI(l.text):'')+'<span>'+l.text+'</span>'; a.dataset.index=idxL;
-    a.onclick=()=>{document.querySelectorAll('#matchLeft .tile').forEach(t=>t.classList.remove('selected')); a.classList.add('selected'); selectedLeft={i:l.i, el:a, idx: idxL};};
+    const a=document.createElement('div'); a.className='tile'; a.tabIndex=0;
+    if(l.isVI){
+      const em = emojiForVI(l.text);
+      if(em){ const s=document.createElement('span'); s.className='img'; s.textContent=em; a.appendChild(s); }
+    }
+    const span=document.createElement('span'); span.textContent = l.text; a.appendChild(span);
+    a.dataset.index=idxL;
+    a.onclick=()=>{document.querySelectorAll('#matchLeft .tile').forEach(t=>t.classList.remove('selected')); a.classList.add('selected'); selectedLeft={i:l.i, el:a};};
+    a.onkeydown=(e)=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); a.click(); } };
     L.appendChild(a)
   });
-  rightItems.forEach((r,idxR)=>{
-    const b=document.createElement('div'); b.className='tile'; b.innerHTML=(r.isVI? emojiForVI(r.text):'')+'<span>'+r.text+'</span>'; b.dataset.index=idxR;
-    b.onclick=()=>{
-      initAudio(); if(!selectedLeft) return; const left=selectedLeft;
-      if(left.i===r.i){
+  rightItems.forEach((r)=>{
+    const b=document.createElement('div'); b.className='tile'; b.tabIndex=0;
+    if(r.isVI){
+      const em = emojiForVI(r.text);
+      if(em){ const s=document.createElement('span'); s.className='img'; s.textContent=em; b.appendChild(s); }
+    }
+    const span=document.createElement('span'); span.textContent = r.text; b.appendChild(span);
+    b.dataset.i = r.i;
+    b.onclick=()=>{ initAudio(); if(!selectedLeft) return; const left = selectedLeft;
+      // tìm index hiện tại theo id thực (không dùng idxR/left.idx vì đã re-render có thể thay đổi)
+      const rightIndex = rightItems.findIndex(x=>x.i === r.i);
+      const leftIndex  = leftItems.findIndex(x=>x.i === left.i);
+      if(leftIndex === -1 || rightIndex === -1) return; // đã bị xóa trước đó
+      if(left.i === r.i){
         b.classList.add('correct'); left.el.classList.add('correct'); score++; sfxCorrect(); vibrate([20,30,20]); showCenter('Thùy Châm cutii giỏi quá !!!');
         setTimeout(()=>{
-          leftItems.splice(left.idx,1); rightItems.splice(idxR,1); selectedLeft=null; 
-          // nếu đã hết cặp trong đợt hiện tại
+          // xóa phần tử theo index thực
+          leftItems.splice(leftIndex,1);
+          rightItems.splice(rightIndex,1);
+          selectedLeft=null;
           if(leftItems.length===0){
             if(matchQueue.length>0){
-              // còn cặp tiếp theo: nạp đợt mới và tiếp tục
               loadNextMatchBatch();
               renderMatch();
               showCenter('Tiếp tục đợt mới 👏');
             }else{
-              // không còn cặp nào: hoàn tất toàn bộ
               renderMatch();
               showCenter('Hoàn thành tất cả cặp! Tuyệt 👏');
             }
@@ -560,26 +721,66 @@ function renderMatch(){
         showCenter('Khum sao làm lại pé ơi');
       }
     };
+    b.onkeydown=(e)=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); b.click(); } };
     R.appendChild(b)
   });
 }
 
-// ====== SPELL ======
+/* ====== SPELL ====== */
 let spellAnswer='';
-function renderSpell(){const p=currentPair(); const q= langDir==='kr2vi'? p.kr : p.vi; const ans = langDir==='kr2vi'? p.vi : p.kr; document.getElementById('spellQ').textContent=q; document.getElementById('spellTip').textContent='Gợi ý: '+(ans.length>2? ans[0]+'...' : ''); spellAnswer=ans; const inp=document.getElementById('spellIn'); inp.value=''; inp.focus();}
+function renderSpell(){if(!DATA || DATA.length===0){ document.getElementById('spellQ').textContent='Nhóm rỗng'; document.getElementById('spellTip').textContent=''; document.getElementById('spellIn').value=''; return; } const p=currentPair(); const q= langDir==='kr2vi'? p.kr : p.vi; const ans = langDir==='kr2vi'? p.vi : p.kr; document.getElementById('spellQ').textContent=q; document.getElementById('spellTip').textContent='Gợi ý: '+(ans.length>2? ans[0]+'...' : ''); spellAnswer=ans; const inp=document.getElementById('spellIn'); inp.value=''; inp.focus();}
 function checkSpell(){initAudio(); const val=document.getElementById('spellIn').value.trim(); if(!val) return; if(val.normalize('NFC').toLowerCase()===spellAnswer.normalize('NFC').toLowerCase()){score++; sfxCorrect(); vibrate([20,30,20]); showCenter('Thùy Châm cutii giỏi quá !!!'); idx=(idx+1)%DATA.length; renderSpell();} else {sfxWrong(); vibrate([60,30,60]); showCenter('Khum sao làm lại pé ơi')} render();}
 
-// ====== TIMER ======
-function tick(){countdown--; document.getElementById('timer').textContent=countdown; if(countdown<=0){clearInterval(timerId); showCenter('⏰ Hết giờ! Nhấn ↻ để chơi tiếp');}}
-function restartTimer(){clearInterval(timerId); countdown=60; timerId=setInterval(tick,1000); render();}
+/* ====== Group selector helpers (restore group select feature) ====== */
+function populateGroupSelector(){
+  const sel = document.getElementById('groupSelect');
+  if(!sel) return;
+  sel.innerHTML = '';
+  Object.keys(GROUPS).forEach(name=>{
+    const opt = document.createElement('option');
+    opt.value = name;
+    opt.textContent = name;
+    sel.appendChild(opt);
+  });
+  if(GROUPS[currentGroup]) sel.value = currentGroup;
+  else {
+    const first = Object.keys(GROUPS)[0];
+    currentGroup = first;
+    sel.value = first;
+    DATA = GROUPS[first] || [];
+  }
+  updateControls();
+}
 
-// ====== INIT ======
+function switchGroup(name){
+  if(!GROUPS[name]) return;
+  currentGroup = name;
+  DATA = GROUPS[name] || [];
+  order = DATA.map((_,i)=>i); shuffle(order);
+  idx = 0; score = 0; mcqState = null; selectedLeft = null;
+  setupMatch(true);
+  updateControls();
+  render();
+  showCenter('Đã chuyển nhóm: ' + name);
+}
+
+function updateControls(){
+  const empty = !DATA || DATA.length === 0;
+  document.querySelectorAll('nav button').forEach(b=>b.disabled = empty);
+  const prevBtn = document.getElementById('flashPrev');
+  const nextBtn = document.getElementById('flashNext');
+  if(prevBtn) prevBtn.disabled = empty;
+  if(nextBtn) nextBtn.disabled = empty;
+  const lang = document.getElementById('langDir'); if(lang) lang.disabled = empty;
+  const imgT = document.getElementById('imgToggle'); if(imgT) imgT.disabled = empty;
+  const gsel = document.getElementById('groupSelect'); if(gsel) gsel.disabled = false;
+}
+
+/* ====== INIT ====== */
 populateGroupSelector();
 order = DATA.map((_,i)=>i);
 shuffle(order);
-// Khởi tạo nối cặp với hàng đợi toàn bộ, hiển thị 10 cặp mỗi đợt
 setupMatch(true);
-restartTimer();
 render();
 </script>
 </body>

@@ -8,49 +8,52 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <title>Ôn tập tiếng Hàn — Miêu tả món ăn (v5)</title>
 <style>
-  :root{--bg:#0f172a;--card:#111827;--pri:#22d3ee;--ok:#22c55e;--bad:#ef4444;--text:#e5e7eb;--muted:#9ca3af}
-  *{box-sizing:border-box;-webkit-tap-highlight-color: transparent}
-  html, body{height:100%;}
-  body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,'Noto Sans',sans-serif;background:linear-gradient(120deg,#0f172a,#0b1023);color:var(--text);min-height:100dvh;}
-  header{padding:16px 12px;text-align:center;position:sticky;top:0;background:linear-gradient(120deg,#0f172a,#0b1023);z-index:10}
-  header h1{margin:0;font-size:clamp(18px,4.5vw,26px)}
-  .wrap{max-width:1100px;margin:0 auto;padding:10px 12px 84px}
-  /* Sticky bottom nav for mobile */
-  nav{position:fixed;left:0;right:0;bottom:0;background:#0b1220cc;backdrop-filter:blur(6px);display:flex;gap:8px;flex-wrap:nowrap;overflow-x:auto;padding:10px 12px;border-top:1px solid #334155;z-index:20}
-  nav::-webkit-scrollbar{display:none}
-  button,select,label.switch{white-space:nowrap}
-  button,select{background:var(--card);color:var(--text);border:1px solid #334155;border-radius:12px;padding:12px 14px;cursor:pointer;font-size:16px}
-  button:active{transform:scale(0.98)}
-  .pill{border-radius:999px}
-  .card{background:radial-gradient(1200px 600px at -10% -30%,#1f2937,transparent),var(--card);border:1px solid #334155;border-radius:16px;padding:14px;margin-bottom:12px}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
-  .hidden{display:none}
-  .score{font-weight:700}
-  .tag{font-size:12px;color:var(--muted)}
-  .k{font-size:clamp(18px,5vw,24px)}
-  .v{color:#94a3b8}
-  .timer{font-variant-numeric:tabular-nums}
-  .mcq-option{padding:14px;border:1px solid #334155;border-radius:14px;background:#0b1220;cursor:pointer;display:flex;align-items:center;gap:10px;min-height:56px}
-  .mcq-option .img{font-size:22px}
-  .mcq-option.correct{border-color:var(--ok);background:#052915}
-  .mcq-option.wrong{border-color:var(--bad);background:#290909}
-  .disable-pointer{pointer-events:none;}
-  .shake{animation:shake .3s}
-  @keyframes shake{10%,90%{transform:translateX(-1px)}20%,80%{transform:translateX(2px)}30%,50%,70%{transform:translateX(-4px)}40%,60%{transform:translateX(4px)}}
-
-  .match-wrap{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-  .col{display:flex;flex-direction:column;gap:8px}
-  .tile{padding:14px;border:1px solid #334155;border-radius:14px;background:#0b1220;cursor:pointer;display:flex;align-items:center;gap:10px;min-height:56px}
-  .tile .img{font-size:22px}
-  .tile.selected{outline:2px solid #22c55e; background:#052915}
-  .tile.correct{border-color:var(--ok);background:#052915}
-  .tile.wrong{border-color:var(--bad);background:#290909}
-
-  #centerOverlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.35);z-index:9999}
-  #centerBox{background:#0b1220;border:1px solid #334155;border-radius:16px;padding:16px 22px;font-size:clamp(18px,5vw,28px);text-align:center}
-  .switch{display:inline-flex;align-items:center;gap:8px}
-  @media (prefers-reduced-motion: reduce){*{scroll-behavior:auto} #centerOverlay{transition:none}}
-  @media (max-width:640px){.grid{grid-template-columns:1fr}.match-wrap{grid-template-columns:1fr}.wrap{padding-bottom:100px}}
+ :root{--bg:#0f172a;--card:#111827;--pri:#22d3ee;--ok:#22c55e;--bad:#ef4444;--text:#e5e7eb;--muted:#9ca3af}
+ *{box-sizing:border-box;-webkit-tap-highlight-color: transparent}
+ html, body{height:100%;}
+ body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,'Noto Sans',sans-serif;background:linear-gradient(120deg,#0f172a,#0b1023);color:var(--text);min-height:100dvh;}
+ header{padding:16px 12px;text-align:center;position:sticky;top:0;background:linear-gradient(120deg,#0f172a,#0b1023);z-index:10}
+ header h1{margin:0;font-size:clamp(18px,4.5vw,26px)}
+ .wrap{max-width:1100px;margin:0 auto;padding:10px 12px 84px}
+ /* Sticky bottom nav for mobile */
+ nav{position:fixed;left:0;right:0;bottom:0;background:#0b1220cc;backdrop-filter:blur(6px);display:flex;gap:8px;flex-wrap:nowrap;overflow-x:auto;padding:10px 12px;border-top:1px solid #334155;z-index:20}
+ nav::-webkit-scrollbar{display:none}
+ button,select,label.switch{white-space:nowrap}
+ button,select{background:var(--card);color:var(--text);border:1px solid #334155;border-radius:12px;padding:12px 14px;cursor:pointer;font-size:16px}
+ button:active{transform:scale(0.98)}
+ .pill{border-radius:999px}
+ .card{background:radial-gradient(1200px 600px at -10% -30%,#1f2937,transparent),var(--card);border:1px solid #334155;border-radius:16px;padding:14px;margin-bottom:12px}
+ .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+ .hidden{display:none}
+ .score{font-weight:700}
+ .tag{font-size:12px;color:var(--muted)}
+ .k{font-size:clamp(18px,5vw,24px)}
+ .v{color:#94a3b8}
+ .timer{font-variant-numeric:tabular-nums}
+ .mcq-option{padding:14px;border:1px solid #334155;border-radius:14px;background:#0b1220;cursor:pointer;display:flex;align-items:center;gap:10px;min-height:56px}
+ .mcq-option .img{font-size:22px}
+ .mcq-option.correct{border-color:var(--ok);background:#052915}
+ .mcq-option.wrong{border-color:var(--bad);background:#290909}
+ .disable-pointer{pointer-events:none;}
+ .shake{animation:shake .3s}
+ @keyframes shake{10%,90%{transform:translateX(-1px)}20%,80%{transform:translateX(2px)}30%,50%,70%{transform:translateX(-4px)}40%,60%{transform:translateX(4px)}}
+ .match-wrap{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+ .col{display:flex;flex-direction:column;gap:8px}
+ .tile{padding:14px;border:1px solid #334155;border-radius:14px;background:#0b1220;cursor:pointer;display:flex;align-items:center;gap:10px;min-height:56px}
+ .tile .img{font-size:22px}
+ .tile.selected{outline:2px solid #22c55e; background:#052915}
+ .tile.correct{border-color:var(--ok);background:#052915}
+ .tile.wrong{border-color:var(--bad);background:#290909}
+ #centerOverlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.35);z-index:9999}
+ #centerBox{background:#0b1220;border:1px solid #334155;border-radius:16px;padding:16px 22px;font-size:clamp(18px,5vw,28px);text-align:center}
+ .switch{display:inline-flex;align-items:center;gap:8px}
+ @media (prefers-reduced-motion: reduce){*{scroll-behavior:auto} #centerOverlay{transition:none}}
+ /* Mobile: keep 2 columns for match mode (CSS-only change) */
+ @media (max-width:640px){
+   .grid{grid-template-columns:1fr}
+   .match-wrap{grid-template-columns:1fr 1fr}
+   .wrap{padding-bottom:100px}
+ }
 </style>
 </head>
 <body>
@@ -89,27 +92,361 @@
     <div id="spellTip" class="tag"></div>
   </section>
 </div>
+
 <nav>
-    <button class="pill" onclick="switchMode('flash')">🔁 Flash</button>
-    <button class="pill" onclick="switchMode('mcq')">🧠 Trắc nghiệm</button>
-    <button class="pill" onclick="switchMode('match')">🧩 Nối cặp</button>
-    <button class="pill" onclick="switchMode('spell')">✍️ Chính tả</button>
-    <select id="langDir" onchange="resetGame()">
-      <option value="kr2vi">Hàn ➜ Việt</option>
-      <option value="vi2kr">Việt ➜ Hàn</option>
-    </select>
-    <label class="switch">
-      <input type="checkbox" id="imgToggle" checked onchange="render()" /> Emoji VN
-    </label>
-    <button onclick="shuffleAll()">🔀 Trộn</button>
-    <span class="score">Điểm: <span id="score">0</span></span>
-    <span class="timer">⏱️ <span id="timer">60</span>s</span>
-    <button onclick="restartTimer()">↻</button>
+  <button class="pill" onclick="switchMode('flash')">🔁 Flash</button>
+  <button class="pill" onclick="switchMode('mcq')">🧠 Trắc nghiệm</button>
+  <button class="pill" onclick="switchMode('match')">🧩 Nối cặp</button>
+  <button class="pill" onclick="switchMode('spell')">✍️ Chính tả</button>
+
+  <!-- Group selector (added; minimal change; same style) -->
+  <select id="groupSelect" onchange="switchGroup(this.value)" title="Chọn nhóm từ vựng"></select>
+
+  <select id="langDir" onchange="resetGame()">
+    <option value="kr2vi">Hàn ➜ Việt</option>
+    <option value="vi2kr">Việt ➜ Hàn</option>
+  </select>
+
+  <label class="switch">
+    <input type="checkbox" id="imgToggle" checked onchange="render()" /> Emoji VN
+  </label>
+  <button onclick="shuffleAll()">🔀 Trộn</button>
+  <span class="score">Điểm: <span id="score">0</span></span>
+  <span class="timer">⏱️ <span id="timer">60</span>s</span>
+  <button onclick="restartTimer()">↻</button>
 </nav>
+
 <div id="centerOverlay"><div id="centerBox"></div></div>
+
 <script>
-// ====== DATA ======
-const DATA = [{"kr": "맛있다", "vi": "ngon"}, {"kr": "맛없다", "vi": "không ngon"}, {"kr": "달다", "vi": "ngọt"}, {"kr": "짜다", "vi": "mặn"}, {"kr": "짭짤하다", "vi": "hơi mặn"}, {"kr": "시다", "vi": "chua"}, {"kr": "맵다", "vi": "cay"}, {"kr": "쓰다", "vi": "đắng"}, {"kr": "싱겁다", "vi": "nhạt"}, {"kr": "신선하다", "vi": "tươi"}, {"kr": "부드럽다", "vi": "mềm"}, {"kr": "느끼하다", "vi": "béo ngậy (nhiều dầu mỡ)"}, {"kr": "담백하다", "vi": "thanh đạm"}];
+// ====== GROUPS & DATA ======
+// Mỗi key trùng CHÍNH XÁC tên file Word (không kèm phần mở rộng)
+const GROUPS = {
+  "__Builtin__": [
+    {"kr": "맛있다", "vi": "ngon"},
+    {"kr": "맛없다", "vi": "không ngon"},
+    {"kr": "달다", "vi": "ngọt"},
+    {"kr": "짜다", "vi": "mặn"},
+    {"kr": "짭짤하다", "vi": "hơi mặn"},
+    {"kr": "시다", "vi": "chua"},
+    {"kr": "맵다", "vi": "cay"},
+    {"kr": "쓰다", "vi": "đắng"},
+    {"kr": "싱겁다", "vi": "nhạt"},
+    {"kr": "신선하다", "vi": "tươi"},
+    {"kr": "부드럽다", "vi": "mềm"},
+    {"kr": "느끼하다", "vi": "béo ngậy (nhiều dầu mỡ)"},
+    {"kr": "담백하다", "vi": "thanh đạm"}
+  ],
+
+  // ===== 1) 50 từ vựng tình huống bếp =====
+  "50 TỪ VÙNG DIỄN TẢ TÌNH HUỐNG SẼ XẢY RA TRONG BẾP": [
+    {"kr":"씻다","vi":"Rửa"},
+    {"kr":"해동하다","vi":"Rã đông"},
+    {"kr":"양파를 자르다","vi":"Cắt hành"},
+    {"kr":"마늘을 까다","vi":"Bóc tỏi"},
+    {"kr":"김치를 썰다","vi":"Thái nhỏ kimchi"},
+    {"kr":"채소를 씻다","vi":"Rửa rau"},
+    {"kr":"양념을 준비하다","vi":"Chuẩn bị gia vị"},
+    {"kr":"재료를 재다","vi":"Cân nguyên liệu"},
+    {"kr":"감자를 깎다","vi":"Gọt khoai tây"},
+    {"kr":"쟁반에 올리다","vi":"Xếp rau vào khay"},
+    {"kr":"계란을 부치다","vi":"Chiên trứng"},
+    {"kr":"채소를 볶다","vi":"Xào rau"},
+    {"kr":"면을 삶다","vi":"Luộc mì"},
+    {"kr":"고기를 끓이다","vi":"Hầm thịt"},
+    {"kr":"소금을 넣다","vi":"Nêm muối"},
+    {"kr":"기름을 두르다","vi":"Cho dầu ăn"},
+    {"kr":"잘 저어 주다","vi":"Đảo đều"},
+    {"kr":"물을 붓다","vi":"Thêm nước"},
+    {"kr":"생선을 굽다","vi":"Nướng cá"},
+    {"kr":"만두를 찌다","vi":"Hấp bánh bao"},
+    {"kr":"그릇을 가져오다","vi":"Lấy bát"},
+    {"kr":"수저 준비하다","vi":"Lấy thìa đũa"},
+    {"kr":"접시에 담다","vi":"Sắp xếp thức ăn lên đĩa"},
+    {"kr":"수량을 확인하다","vi":"Kiểm tra số lượng"},
+    {"kr":"음식을 장식하다","vi":"Trang trí món ăn"},
+    {"kr":"주방 창구에 올리다","vi":"Đặt món ra cửa bếp"},
+    {"kr":"서버직원에게 부르다","vi":"Gọi phục vụ đến lấy"},
+    {"kr":"재료가 다 떨어졌다","vi":"Báo hết nguyên liệu"},
+    {"kr":"맛을 보다","vi":"Thử vị"},
+    {"kr":"온도를 확인하다","vi":"Kiểm tra nhiệt độ"},
+    {"kr":"설거지를 하다","vi":"Rửa bát"},
+    {"kr":"테이블을 닦다","vi":"Lau bàn"},
+    {"kr":"바닥을 닦다","vi":"Lau sàn"},
+    {"kr":"쓰레기를 버리다","vi":"Đổ rác"},
+    {"kr":"행주를 가져오다","vi":"Đem khăn lau"},
+    {"kr":"냄새를 없애다","vi":"Khử mùi"},
+    {"kr":"칼을 정리하다","vi":"Cất dao kéo"},
+    {"kr":"양념을 정리하다","vi":"Cất gia vị"},
+    {"kr":"가스를 닦다","vi":"Lau bếp ga"},
+    {"kr":"냉장고를 정리하다","vi":"Dọn tủ lạnh"},
+    {"kr":"기름이 쏟아졌다","vi":"Bị đổ dầu"},
+    {"kr":"불이 났다","vi":"Bị cháy"},
+    {"kr":"손을 베였다","vi":"Cắt vào tay"},
+    {"kr":"물이 넘쳤다","vi":"Nước sôi trào ra"},
+    {"kr":"국이 쏟아졌다","vi":"Đổ canh"},
+    {"kr":"그릇이 깨졌다","vi":"Làm vỡ bát"},
+    {"kr":"화상을 입었다","vi":"Bị bỏng"},
+    {"kr":"인원이 부족하다","vi":"Thiếu nhân viên"},
+    {"kr":"환풍기가 고장났다","vi":"Máy hút mùi hỏng"},
+    {"kr":"손님이 빨리 달라고 하다","vi":"Khách gọi món gấp"}
+  ],
+
+  // ===== 2) Gia vị & phương pháp nấu (bản (1)) =====
+  ". Từ vựng tiếng Hàn về gia vị nấu ăn (1)": [
+    {"kr":"설탕","vi":"Đường"},
+    {"kr":"소금","vi":"Muối"},
+    {"kr":"미원, 화학조미료","vi":"Bột ngọt, mì chính"},
+    {"kr":"고춧가루","vi":"Ớt bột"},
+    {"kr":"후추","vi":"Tiêu"},
+    {"kr":"식초","vi":"Giấm"},
+    {"kr":"피시소스, 피쉬소스","vi":"Nước mắm"},
+    {"kr":"간장","vi":"Nước tương"},
+    {"kr":"식용유","vi":"Dầu ăn"},
+    {"kr":"굴소스","vi":"Dầu hào"},
+    {"kr":"참기름","vi":"Dầu mè"},
+    {"kr":"고추장","vi":"Tương ớt"},
+    {"kr":"된장","vi":"Tương đậu"},
+    {"kr":"부치다","vi":"Chiên, rán"},
+    {"kr":"튀기다","vi":"Chiên (ngập dầu)"},
+    {"kr":"볶다","vi":"Xào"},
+    {"kr":"삶다","vi":"Luộc"},
+    {"kr":"찌다","vi":"Hấp"},
+    {"kr":"굽다","vi":"Nướng"},
+    {"kr":"끓이다","vi":"Đun sôi, nấu"},
+    {"kr":"데치다","vi":"Trụng, trần"},
+    {"kr":"졸이다","vi":"Ninh, hầm"},
+    {"kr":"자르다","vi":"Cắt"},
+    {"kr":"썰다","vi":"Thái sợi, cắt lát"},
+    {"kr":"다지다","vi":"Giã bằm, băm nhỏ"},
+    {"kr":"싸다","vi":"Gói, cuốn"},
+    {"kr":"넣다","vi":"Bỏ vào"},
+    {"kr":"비비다","vi":"Trộn, quấy"},
+    {"kr":"맛을 보다","vi":"Nêm nếm"}
+  ],
+
+  // ===== 3) Đạo cụ bếp (bản (1)) =====
+  "đạo cụ bếp (1)": [
+    {"kr":"칼, 식칼","vi":"Dao"},
+    {"kr":"숟가락","vi":"Muỗng, thìa"},
+    {"kr":"포크","vi":"Nĩa"},
+    {"kr":"집게","vi":"Kẹp (gắp đồ ăn)"},
+    {"kr":"국자","vi":"Muôi, vá (múc canh)"},
+    {"kr":"뒤집개","vi":"Xẻng (nấu ăn)"},
+    {"kr":"그릇","vi":"Tô"},
+    {"kr":"밥그릇","vi":"Chén, bát cơm"},
+    {"kr":"접시","vi":"Đĩa"},
+    {"kr":"컵","vi":"Cốc, ly"},
+    {"kr":"유리잔","vi":"Cốc, ly thủy tinh"},
+    {"kr":"도마","vi":"Thớt"},
+    {"kr":"주걱","vi":"Vá múc cơm"},
+    {"kr":"뚜껑","vi":"Nắp"},
+    {"kr":"전기밥솥","vi":"Nồi cơm điện"},
+    {"kr":"대야","vi":"Thau, chậu"},
+    {"kr":"소쿠리","vi":"Rổ tre"},
+    {"kr":"냄비","vi":"Nồi, xoong"},
+    {"kr":"프라이팬","vi":"Chảo"},
+    {"kr":"오븐","vi":"Lò nướng"},
+    {"kr":"전자레인지","vi":"Lò vi sóng"},
+    {"kr":"냉장고","vi":"Tủ lạnh"},
+    {"kr":"난로","vi":"Bếp lò"},
+    {"kr":"식탁","vi":"Bàn ăn"},
+    {"kr":"식기세척기","vi":"Máy rửa chén"},
+    {"kr":"믹서기","vi":"Máy xay sinh tố"},
+    {"kr":"즙서기","vi":"Máy ép"}
+  ],
+
+  // ===== 4) Gia vị & phương pháp nấu (bản không (1)) =====
+  ". Từ vựng tiếng Hàn về gia vị nấu ăn": [
+    {"kr":"설탕","vi":"Đường"},
+    {"kr":"소금","vi":"Muối"},
+    {"kr":"미원, 화학조미료","vi":"Bột ngọt, mì chính"},
+    {"kr":"고춧가루","vi":"Ớt bột"},
+    {"kr":"후추","vi":"Tiêu"},
+    {"kr":"식초","vi":"Giấm"},
+    {"kr":"피시소스, 피쉬소스","vi":"Nước mắm"},
+    {"kr":"간장","vi":"Nước tương"},
+    {"kr":"식용유","vi":"Dầu ăn"},
+    {"kr":"굴소스","vi":"Dầu hào"},
+    {"kr":"참기름","vi":"Dầu mè"},
+    {"kr":"고추장","vi":"Tương ớt"},
+    {"kr":"된장","vi":"Tương đậu"},
+    {"kr":"부치다","vi":"Chiên, rán"},
+    {"kr":"튀기다","vi":"Chiên (ngập dầu)"},
+    {"kr":"볶다","vi":"Xào"},
+    {"kr":"삶다","vi":"Luộc"},
+    {"kr":"찌다","vi":"Hấp"},
+    {"kr":"굽다","vi":"Nướng"},
+    {"kr":"끓이다","vi":"Đun sôi, nấu"},
+    {"kr":"데치다","vi":"Trụng, trần"},
+    {"kr":"졸이다","vi":"Ninh, hầm"},
+    {"kr":"자르다","vi":"Cắt"},
+    {"kr":"썰다","vi":"Thái sợi, cắt lát"},
+    {"kr":"다지다","vi":"Giã bằm, băm nhỏ"},
+    {"kr":"싸다","vi":"Gói, cuốn"},
+    {"kr":"넣다","vi":"Bỏ vào"},
+    {"kr":"비비다","vi":"Trộn, quấy"},
+    {"kr":"맛을 보다","vi":"Nêm nếm"}
+  ],
+
+  // ===== 5) Đạo cụ bếp (bản không (1)) =====
+  "đạo cụ bếp": [
+    {"kr":"칼, 식칼","vi":"Dao"},
+    {"kr":"숟가락","vi":"Muỗng, thìa"},
+    {"kr":"포크","vi":"Nĩa"},
+    {"kr":"집게","vi":"Kẹp (gắp đồ ăn)"},
+    {"kr":"국자","vi":"Muôi, vá (múc canh)"},
+    {"kr":"뒤집개","vi":"Xẻng (nấu ăn)"},
+    {"kr":"그릇","vi":"Tô"},
+    {"kr":"밥그릇","vi":"Chén, bát cơm"},
+    {"kr":"접시","vi":"Đĩa"},
+    {"kr":"컵","vi":"Cốc, ly"},
+    {"kr":"유리잔","vi":"Cốc, ly thủy tinh"},
+    {"kr":"도마","vi":"Thớt"},
+    {"kr":"주걱","vi":"Vá múc cơm"},
+    {"kr":"뚜껑","vi":"Nắp"},
+    {"kr":"전기밥솥","vi":"Nồi cơm điện"},
+    {"kr":"대야","vi":"Thau, chậu"},
+    {"kr":"소쿠리","vi":"Rổ tre"},
+    {"kr":"냄비","vi":"Nồi, xoong"},
+    {"kr":"프라이팬","vi":"Chảo"},
+    {"kr":"오븐","vi":"Lò nướng"},
+    {"kr":"전자레인지","vi":"Lò vi sóng"},
+    {"kr":"냉장고","vi":"Tủ lạnh"},
+    {"kr":"난로","vi":"Bếp lò"},
+    {"kr":"식탁","vi":"Bàn ăn"},
+    {"kr":"식기세척기","vi":"Máy rửa chén"},
+    {"kr":"믹서기","vi":"Máy xay sinh tố"},
+    {"kr":"즙서기","vi":"Máy ép"}
+  ],
+
+  // ===== 6) Nguyên liệu (docx3) =====
+  "Từ vựng tiếng Hàn về nhà bếp.docx3": [
+    {"kr":"소고기","vi":"thịt bò"},
+    {"kr":"돼지고기","vi":"thịt lợn"},
+    {"kr":"오리고기","vi":"thịt vịt"},
+    {"kr":"닭고기","vi":"thịt gà"},
+    {"kr":"닭가슴살","vi":"ức gà"},
+    {"kr":"닭날개","vi":"cánh gà"},
+    {"kr":"닭다리","vi":"đùi gà"},
+    {"kr":"장어","vi":"lươn"},
+    {"kr":"생선","vi":"cá"},
+    {"kr":"게","vi":"cua"},
+    {"kr":"새우","vi":"tôm"},
+    {"kr":"꼬막","vi":"sò huyết"},
+    {"kr":"재첩","vi":"hến"},
+    {"kr":"전복","vi":"bào ngư"},
+    {"kr":"오징어","vi":"mực"},
+    {"kr":"달걀","vi":"trứng"},
+    {"kr":"두부","vi":"đậu phụ"},
+    {"kr":"양파","vi":"hành tây"},
+    {"kr":"대파","vi":"hành baro"},
+    {"kr":"숙주나물","vi":"giá đỗ"},
+    {"kr":"김치","vi":"kim chi"},
+    {"kr":"공심채","vi":"rau muống"},
+    {"kr":"배추","vi":"cải thảo"},
+    {"kr":"병풀","vi":"rau má"},
+    {"kr":"버섯","vi":"nấm"},
+    {"kr":"풀버섯 / 잣버섯","vi":"nấm rơm"},
+    {"kr":"감자","vi":"khoai tây"},
+    {"kr":"당근","vi":"cà rốt"},
+    {"kr":"오이","vi":"dưa leo, dưa chuột"},
+    {"kr":"토마토","vi":"cà chua"},
+    {"kr":"수세미","vi":"mướp"},
+    {"kr":"고구마","vi":"khoai lang"},
+    {"kr":"호박","vi":"bí ngô"},
+    {"kr":"애호박","vi":"bí ngòi"},
+    {"kr":"레몬","vi":"chanh"},
+    {"kr":"땅콩","vi":"đậu phộng, lạc"}
+  ],
+
+  // ===== 7) Dụng cụ nấu ăn (docx 2) =====
+  "Từ vựng tiếng Hàn về nhà bếp.docx 2": [
+    {"kr":"냄비","vi":"nồi, xoong"},
+    {"kr":"프라이팬","vi":"chảo"},
+    {"kr":"전기밥솥","vi":"nồi cơm điện"},
+    {"kr":"오븐","vi":"lò nướng"},
+    {"kr":"압력솥","vi":"nồi áp suất"},
+    {"kr":"가스레인지","vi":"bếp gas"},
+    {"kr":"전기레인지","vi":"bếp từ"},
+    {"kr":"식탁","vi":"bàn ăn"},
+    {"kr":"냉장고","vi":"tủ lạnh"},
+    {"kr":"찬장","vi":"tủ bếp, tủ đựng chén bát"},
+    {"kr":"칼","vi":"dao"},
+    {"kr":"가위","vi":"kéo"},
+    {"kr":"접시","vi":"đĩa"},
+    {"kr":"그릇","vi":"tô, chén, bát"},
+    {"kr":"수저","vi":"thìa và đũa"},
+    {"kr":"숟가락","vi":"thìa (muỗng)"},
+    {"kr":"젓가락","vi":"đũa"},
+    {"kr":"포크","vi":"nĩa"},
+    {"kr":"컵","vi":"cốc, ly"},
+    {"kr":"유리잔","vi":"cốc, ly thủy tinh"},
+    {"kr":"바가지","vi":"cái gáo"},
+    {"kr":"소쿠리","vi":"cái rổ"},
+    {"kr":"국자","vi":"cái muôi, cái vá"},
+    {"kr":"불판","vi":"vỉ nướng"},
+    {"kr":"쟁반","vi":"khay, mâm"},
+    {"kr":"앞치마","vi":"tạp dề"},
+    {"kr":"냅킨","vi":"khăn ăn, giấy ăn"},
+    {"kr":"이쑤시개","vi":"tăm"}
+  ],
+
+  // ===== 8) Phương pháp nấu ăn (docx) =====
+  "Từ vựng tiếng Hàn về nhà bếp": [
+    {"kr":"볶다","vi":"chiên, xào sử dụng ít dầu (chiên cơm, xào rau,…)"},
+    {"kr":"튀기다","vi":"chiên ngập dầu"},
+    {"kr":"굽다","vi":"nướng"},
+    {"kr":"끓이다","vi":"nấu sôi, đun sôi"},
+    {"kr":"찌다","vi":"chưng, hấp"},
+    {"kr":"삶다","vi":"luộc"},
+    {"kr":"데치다","vi":"trụng, luộc sơ"},
+    {"kr":"가열하다","vi":"đun nóng, hâm nóng"},
+    {"kr":"해동하다","vi":"rã đông"},
+    {"kr":"갈다","vi":"nghiền, xay"},
+    {"kr":"찧다","vi":"giã"},
+    {"kr":"자르다","vi":"cắt"},
+    {"kr":"반으로 자르다","vi":"cắt làm đôi"},
+    {"kr":"네 조각으로 자르다","vi":"cắt làm tư"},
+    {"kr":"깍둑썰기","vi":"cắt hạt lựu"},
+    {"kr":"썰다","vi":"thái"},
+    {"kr":"찢다","vi":"xé, bổ, tách"},
+    {"kr":"다지다","vi":"băm nhỏ"},
+    {"kr":"벗기다","vi":"bóc, tách, lột (lớp vỏ mềm bên ngoài)"},
+    {"kr":"까다","vi":"bóc, tách, lột (lớp vỏ tương đối cứng bên ngoài)"},
+    {"kr":"짜내다","vi":"ép, vắt nước"},
+    {"kr":"젓다","vi":"quấy, khuấy"},
+    {"kr":"넣다","vi":"cho vào, thêm vào"},
+    {"kr":"담그다","vi":"ngâm, muối, ủ"},
+    {"kr":"발라내다","vi":"gỡ, róc"},
+    {"kr":"뼈를 발라내다","vi":"rút xương"},
+    {"kr":"쌀을 씻다","vi":"vo gạo"},
+    {"kr":"고기를 꼬챙이에 꽂다","vi":"xâu thịt vào xiên"},
+    {"kr":"국에 맛을 내다","vi":"nêm gia vị vào canh"}
+  ],
+
+  // ===== 9) Miêu tả món ăn (docx4) =====
+  "Từ vựng tiếng Hàn về miêu tả.docx4": [
+    {"kr":"맛있다","vi":"ngon"},
+    {"kr":"맛없다","vi":"không ngon"},
+    {"kr":"달다","vi":"ngọt"},
+    {"kr":"짜다","vi":"mặn"},
+    {"kr":"짭짤하다","vi":"hơi mặn"},
+    {"kr":"시다","vi":"chua"},
+    {"kr":"맵다","vi":"cay"},
+    {"kr":"쓰다","vi":"đắng"},
+    {"kr":"싱겁다","vi":"nhạt"},
+    {"kr":"신선하다","vi":"tươi"},
+    {"kr":"부드럽다","vi":"mềm"},
+    {"kr":"느끼하다","vi":"béo ngậy (nhiều dầu mỡ)"},
+    {"kr":"담백하다","vi":"thanh đạm"}
+  ]
+};
+
+let currentGroup = "__Builtin__";
+let DATA = GROUPS[currentGroup];
+
+// ====== IMG ======
 const IMG = {"ngon": "🤤", "không ngon": "😖", "ngọt": "🍬", "mặn": "🧂", "hơi mặn": "🧂", "chua": "🍋", "cay": "🌶️", "đắng": "☕", "nhạt": "💧", "tươi": "🥗", "mềm": "🧈", "béo ngậy": "🧀", "thanh đạm": "🫖"};
 
 // ====== STATE ======
@@ -125,10 +462,40 @@ function isVI(text){return /[àáảãạăằắẳẵặâầấẩẫậêề
 function emojiForVI(text){if(!document.getElementById('imgToggle')?.checked) return ''; text=(text||'').toLowerCase(); let key=Object.keys(IMG).find(k=> text.includes(k)); return key? `<span class="img">${IMG[key]}</span>`:''}
 function showCenter(msg){const ov=document.getElementById('centerOverlay'); const box=document.getElementById('centerBox'); box.textContent=msg; ov.style.display='flex'; setTimeout(()=>{ov.style.display='none'}, 900)}
 function shuffleAll(){shuffle(order); idx=0; mcqState=null; render(); showCenter('Đã trộn bộ từ!')}
-function switchMode(m){document.querySelectorAll('section').forEach(s=>s.classList.add('hidden'));document.getElementById(m).classList.remove('hidden');mode=m; if(m==='match') setupMatch(); if(m==='mcq') mcqState=null; render(); window.scrollTo({top:0, behavior:'smooth'});} 
+function switchMode(m){document.querySelectorAll('section').forEach(s=>s.classList.add('hidden'));document.getElementById(m).classList.remove('hidden');mode=m; if(m==='match') setupMatch(); if(m==='mcq') mcqState=null; render(); window.scrollTo({top:0, behavior:'smooth'});}
 function resetGame(){langDir=document.getElementById('langDir').value;idx=0; mcqState=null; if(mode==='match') setupMatch(); render()}
 function currentPair(){return DATA[order[idx]]}
 function render(){document.getElementById('score').textContent=score;document.getElementById('timer').textContent=countdown; if(mode==='flash') renderFlash(); if(mode==='mcq') renderMCQ(); if(mode==='match') renderMatch(); if(mode==='spell') renderSpell();}
+
+// ====== Group handling ======
+function populateGroupSelector(){
+  const sel = document.getElementById('groupSelect');
+  sel.innerHTML = '';
+  Object.keys(GROUPS).forEach(name=>{
+    const opt=document.createElement('option');
+    opt.value = name;
+    opt.textContent = name; // hiển thị đúng tên file (không đuôi)
+    sel.appendChild(opt);
+  });
+  sel.value = currentGroup;
+}
+function switchGroup(name){
+  if(!GROUPS[name]) return;
+  currentGroup = name;
+  DATA = GROUPS[name];
+
+  // Reset trạng thái (giữ nguyên mode, không reload)
+  order = DATA.map((_,i)=>i);
+  shuffle(order);
+  idx = 0;
+  score = 0;
+  mcqState = null;
+  selectedLeft = null;
+
+  if(mode==='match') setupMatch();
+  render();
+  showCenter('Đã chuyển nhóm: ' + name);
+}
 
 // ====== TOUCH SWIPE FOR FLASH ======
 let touchStartX=null; document.addEventListener('touchstart',e=>{touchStartX=e.changedTouches[0].screenX},{passive:true});
@@ -144,32 +511,31 @@ function beep({freq=880,dur=120,type='sine',vol=0.1}={}){if(!audioCtx) return; c
 function sfxCorrect(){beep({freq:1046,dur:120,type:'triangle',vol:0.08}); setTimeout(()=>beep({freq:1318,dur:120,type:'triangle',vol:0.08}),120)}
 function sfxWrong(){beep({freq:220,dur:160,type:'sawtooth',vol:0.06})}
 function vibrate(pattern){if(navigator.vibrate) navigator.vibrate(pattern)}
-
 window.addEventListener('pointerdown',()=>{initAudio(); if(audioCtx?.state==='suspended') audioCtx.resume();},{once:true});
 
-// ====== MCQ (no reshuffle until correct) ======
+// ====== MCQ ======
 function buildMCQState(){const i=order[idx]; const p=DATA[i]; const q = langDir==='kr2vi'? p.kr : p.vi; const answer = langDir==='kr2vi'? p.vi : p.kr; const pickWrong=(correctIndex,n=3)=>{const pool=[...Array(DATA.length).keys()].filter(k=>k!==correctIndex);shuffle(pool);return pool.slice(0,n)}; let opts=[answer,...pickWrong(i).map(j=> langDir==='kr2vi'? DATA[j].vi : DATA[j].kr)]; shuffle(opts); return {i, q, answer, opts, tried:new Set()}; }
 function renderMCQ(){ if(!mcqState || mcqState.i!==order[idx]) mcqState = buildMCQState(); const {q, answer, opts} = mcqState; document.getElementById('mcqQ').textContent=q; const box=document.getElementById('mcqOptions'); box.innerHTML=''; opts.forEach(opt=>{const div=document.createElement('div'); div.className='mcq-option'; div.innerHTML=(isVI(opt)? emojiForVI(opt):'') + '<span>'+opt+'</span>'; div.onclick=()=>{initAudio(); if(opt===answer){div.classList.add('correct'); score++; sfxCorrect(); vibrate([20,30,20]); showCenter('Thùy Châm cutii giỏi quá !!!'); setTimeout(()=>{ idx=(idx+1)%DATA.length; mcqState=null; renderMCQ(); }, 380); }
-      else {div.classList.add('wrong'); sfxWrong(); vibrate([50,30,50]); document.getElementById('mcq').classList.add('shake'); setTimeout(()=>document.getElementById('mcq').classList.remove('shake'), 320); showCenter('Khum sao làm lại pé ơi');}
-      render();
-    }; box.appendChild(div);}); }
+ else {div.classList.add('wrong'); sfxWrong(); vibrate([50,30,50]); document.getElementById('mcq').classList.add('shake'); setTimeout(()=>document.getElementById('mcq').classList.remove('shake'), 320); showCenter('Khum sao làm lại pé ơi'); }
+ render();
+ }; box.appendChild(div);}); }
 
-// ====== MATCH (emoji only on VI side) ======
+// ====== MATCH ======
 let matchPairs=[]; let leftItems=[]; let rightItems=[];
 function setupMatch(){selectedLeft=null; matchPairs = shuffle(order.slice(0)).slice(0, Math.min(10, DATA.length));
-  if(langDir==='kr2vi'){
-    leftItems = matchPairs.map(i=>({i, text: DATA[i].kr, isVI:false}));
-    rightItems = shuffle(matchPairs.map(i=>({i, text: DATA[i].vi, isVI:true})));
-  } else {
-    leftItems = matchPairs.map(i=>({i, text: DATA[i].vi, isVI:true}));
-    rightItems = shuffle(matchPairs.map(i=>({i, text: DATA[i].kr, isVI:false})));
-  }
+ if(langDir==='kr2vi'){
+  leftItems = matchPairs.map(i=>({i, text: DATA[i].kr, isVI:false}));
+  rightItems = shuffle(matchPairs.map(i=>({i, text: DATA[i].vi, isVI:true})));
+ } else {
+  leftItems = matchPairs.map(i=>({i, text: DATA[i].vi, isVI:true}));
+  rightItems = shuffle(matchPairs.map(i=>({i, text: DATA[i].kr, isVI:false})));
+ }
 }
 function renderMatch(){const L=document.getElementById('matchLeft'); const R=document.getElementById('matchRight'); L.innerHTML=''; R.innerHTML='';
-  leftItems.forEach((l,idxL)=>{const a=document.createElement('div'); a.className='tile'; a.innerHTML= (l.isVI? emojiForVI(l.text):'') + '<span>'+l.text+'</span>'; a.dataset.index=idxL; a.onclick=()=>{document.querySelectorAll('#matchLeft .tile').forEach(t=>t.classList.remove('selected')); a.classList.add('selected'); selectedLeft={i:l.i, el:a, idx: idxL};}; L.appendChild(a)});
-  rightItems.forEach((r,idxR)=>{const b=document.createElement('div'); b.className='tile'; b.innerHTML= (r.isVI? emojiForVI(r.text):'') + '<span>'+r.text+'</span>'; b.dataset.index=idxR; b.onclick=()=>{initAudio(); if(!selectedLeft) return; const left=selectedLeft; if(left.i===r.i){ b.classList.add('correct'); left.el.classList.add('correct'); score++; sfxCorrect(); vibrate([20,30,20]); showCenter('Thùy Châm cutii giỏi quá !!!'); setTimeout(()=>{ leftItems.splice(left.idx,1); rightItems.splice(idxR,1); selectedLeft=null; renderMatch(); if(leftItems.length===0){ showCenter('Hoàn thành tất cả cặp! Tuyệt 👏'); } render(); }, 320);
-      } else { b.classList.add('wrong'); left.el.classList.add('wrong'); sfxWrong(); vibrate([60,30,60]); document.getElementById('match').classList.add('shake'); setTimeout(()=>{b.classList.remove('wrong'); left.el.classList.remove('wrong'); document.getElementById('match').classList.remove('shake');}, 380); showCenter('Khum sao làm lại pé ơi'); }
-    }; R.appendChild(b)});
+ leftItems.forEach((l,idxL)=>{const a=document.createElement('div'); a.className='tile'; a.innerHTML= (l.isVI? emojiForVI(l.text):'') + '<span>'+l.text+'</span>'; a.dataset.index=idxL; a.onclick=()=>{document.querySelectorAll('#matchLeft .tile').forEach(t=>t.classList.remove('selected')); a.classList.add('selected'); selectedLeft={i:l.i, el:a, idx: idxL};}; L.appendChild(a)});
+ rightItems.forEach((r,idxR)=>{const b=document.createElement('div'); b.className='tile'; b.innerHTML= (r.isVI? emojiForVI(r.text):'') + '<span>'+r.text+'</span>'; b.dataset.index=idxR; b.onclick=()=>{initAudio(); if(!selectedLeft) return; const left=selectedLeft; if(left.i===r.i){ b.classList.add('correct'); left.el.classList.add('correct'); score++; sfxCorrect(); vibrate([20,30,20]); showCenter('Thùy Châm cutii giỏi quá !!!'); setTimeout(()=>{ leftItems.splice(left.idx,1); rightItems.splice(idxR,1); selectedLeft=null; renderMatch(); if(leftItems.length===0){ showCenter('Hoàn thành tất cả cặp! Tuyệt 👏'); } render(); }, 320);
+ } else { b.classList.add('wrong'); left.el.classList.add('wrong'); sfxWrong(); vibrate([60,30,60]); document.getElementById('match').classList.add('shake'); setTimeout(()=>{b.classList.remove('wrong'); left.el.classList.remove('wrong'); document.getElementById('match').classList.remove('shake');}, 380); showCenter('Khum sao làm lại pé ơi'); }
+ }; R.appendChild(b)});
 }
 
 // ====== SPELL ======
@@ -182,7 +548,12 @@ function tick(){countdown--; document.getElementById('timer').textContent=countd
 function restartTimer(){clearInterval(timerId); countdown=60; timerId=setInterval(tick,1000); render();}
 
 // ====== INIT ======
-order = DATA.map((_,i)=>i); shuffle(order); setupMatch(); restartTimer(); render();
+populateGroupSelector();
+order = DATA.map((_,i)=>i);
+shuffle(order);
+setupMatch();
+restartTimer();
+render();
 </script>
 </body>
 </html>

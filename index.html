@@ -129,11 +129,92 @@
  }
  /* Thu nhỏ kích thước selector nhóm từ vựng (không đổi layout) */
  #groupSelect{padding:8px 12px;font-size:14px;width:auto;max-width:120px;}
+
+ /* ===== Marquee Animation Styles ===== */
+ :root{
+   --marquee-speed: 15s; /* Desktop speed */
+   --marquee-color-duration: 6s;
+ }
+ 
+ header{
+   padding: 16px 12px !important;
+   text-align: center !important;
+   position: sticky !important;
+   top: 0 !important;
+   background: linear-gradient(120deg, #0f172a, #0b1023) !important;
+   z-index: 10 !important;
+   overflow: hidden;
+ }
+ 
+ .marquee-container{
+   width: 100%;
+   overflow: hidden;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+ }
+ 
+ .marquee-wrapper{
+   display: inline-block;
+   white-space: nowrap;
+   animation: marquee var(--marquee-speed) linear infinite;
+ }
+ 
+ header h1{
+   margin: 0 !important;
+   font-size: clamp(18px, 4.5vw, 26px);
+   font-weight: 600;
+   white-space: nowrap;
+   display: inline-block;
+   background: linear-gradient(90deg, 
+     #ffffff 0%, 
+     #7ee8f7 25%, 
+     #ff99cc 50%, 
+     #ffffff 100%);
+   background-size: 200% 100%;
+   animation: colorShift var(--marquee-color-duration) ease-in-out infinite;
+   -webkit-background-clip: text;
+   background-clip: text;
+   -webkit-text-fill-color: transparent;
+   padding: 0;
+ }
+ 
+ @keyframes marquee{
+   0%{
+     transform: translateX(100%);
+   }
+   100%{
+     transform: translateX(-100%);
+   }
+ }
+ 
+ @keyframes colorShift{
+   0%{
+     background-position: 0% 0%;
+   }
+   50%{
+     background-position: 100% 0%;
+   }
+   100%{
+     background-position: 0% 0%;
+   }
+ }
+ 
+ /* Mobile: slower marquee speed */
+ @media (max-width:768px){
+   :root{
+     --marquee-speed: 20s; /* Slower on mobile */
+   }
+ }
 </style>
 </head>
 <body>
 <header>
-  <h1>🎮 Ôn tập từ vựng tiếng Hàn: Miêu tả & cảm nhận món ăn</h1>
+  <div class="marquee-container">
+    <div class="marquee-wrapper">
+      <h1>Anh yêu em   Anh yêu em   Anh yêu em   </h1>
+    </div>
+  </div>
 </header>
 <div class="wrap">
   <section id="flash" class="card">

@@ -3,11 +3,12 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate, max-age=0" />
 <meta http-equiv="pragma" content="no-cache" />
 <meta http-equiv="expires" content="0" />
 <meta name="theme-color" content="#0f172a" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <title> Chúc bé học giỏi !!! </title>
 <style>
  :root{
@@ -236,10 +237,32 @@
 <header>
   <div class="marquee-container">
     <div class="marquee-wrapper">
-      <h1>Chúc em học thật giỏi nhé , thấy dòng này đừng bất ngờ nha mới update đấy hihi❤️</h1>
+      <h1>Lo học đi !!!!!!❤️</h1>
     </div>
   </div>
 </header>
+<script>
+// iOS cache buster - run IMMEDIATELY before anything else loads
+(function(){
+  const isiOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
+  if(!isiOS) return;
+  
+  // Clear all caches
+  if('caches' in window){
+    caches.keys().then(names => names.forEach(n => caches.delete(n)));
+  }
+  
+  // Aggressive hard refresh every time on iOS
+  const currentURL = window.location.href;
+  const cleanURL = currentURL.split('?')[0];
+  const newURL = cleanURL + '?refresh=' + Date.now();
+  
+  if(currentURL === cleanURL){
+    // No refresh param yet, add it
+    window.location.replace(newURL);
+  }
+})();
+</script>
 <div class="wrap">
   <section id="flash" class="card">
     <h2>Flashcards</h2>
@@ -926,17 +949,19 @@ function updateControls(){
   const gsel = document.getElementById('groupSelect'); if(gsel) gsel.disabled = false;
 }
 
-/* ====== Cache Busting for Mobile ====== */
-if('serviceWorker' in navigator){
-  navigator.serviceWorker.getRegistrations().then(regs => {
-    regs.forEach(reg => reg.unregister());
+// Additional iOS cache clearing on page load
+if(/iPhone|iPad|iPod/.test(navigator.userAgent)){
+  // Prevent back/forward cache on iOS
+  window.addEventListener('pageshow', function(event){
+    if(event.persisted){
+      location.reload();
+    }
   });
-}
-// Force reload on mobile
-if(/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)){
-  if(!sessionStorage.getItem('pageLoaded')){
-    sessionStorage.setItem('pageLoaded', 'true');
-    location.reload();
+  // Clear any offline cache
+  if('serviceWorker' in navigator){
+    navigator.serviceWorker.getRegistrations().then(regs => {
+      regs.forEach(reg => reg.unregister());
+    }).catch(()=>{});
   }
 }
 
